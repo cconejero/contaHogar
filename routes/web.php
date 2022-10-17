@@ -12,15 +12,19 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
 Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
 
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/create', [UserController::class, 'create']);
+Route::post('/users', [UserController::class, 'store']);
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/', function () {
         return Inertia::render('Home');
     });
 
-    Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/create', [UserController::class, 'create'])->middleware('can:create,\App\Models\User');
-    Route::post('/users', [UserController::class, 'store']);
+//    Route::get('/users', [UserController::class, 'index']);
+//    Route::get('/users/create', [UserController::class, 'create'])->middleware('can:create,\App\Models\User');
+//    Route::post('/users', [UserController::class, 'store']);
 
     Route::get('/settings', function () {
         return Inertia::render('Settings');
