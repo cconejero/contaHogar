@@ -628,6 +628,14 @@ var map = {
 		"./resources/js/Pages/Home.vue",
 		"resources_js_Pages_Home_vue"
 	],
+	"./PWAPrompt": [
+		"./resources/js/Pages/PWAPrompt.vue",
+		"resources_js_Pages_PWAPrompt_vue"
+	],
+	"./PWAPrompt.vue": [
+		"./resources/js/Pages/PWAPrompt.vue",
+		"resources_js_Pages_PWAPrompt_vue"
+	],
 	"./Settings": [
 		"./resources/js/Pages/Settings.vue",
 		"resources_js_Pages_Settings_vue"
