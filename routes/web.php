@@ -7,8 +7,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::post('/cards', [CardController::class, 'store']);
-
 Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
 Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
@@ -29,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cards', [CardController::class, 'index']);
     Route::get('/cards/create', [CardController::class, 'create']);
+    Route::post('/cards', [CardController::class, 'store']);
     Route::get('/cards/{card}', [CardController::class, 'show']);
 
     Route::get('/cards/{card}/spends/create', [CardSpendController::class, 'create']);
