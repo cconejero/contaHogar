@@ -65,7 +65,7 @@ var __default__ = {
     var user = {
       name: 'Pepe lepew',
       email: 'tom@example.com',
-      imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+      imageUrl: 'https://littleerica.herokuapp.com/img/LogoLE.png'
     };
     var navigation = [{
       name: 'Inicio',
@@ -180,8 +180,8 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "flex-shrink-0"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   "class": "h-8 w-8",
-  src: "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500",
-  alt: "Your Company"
+  src: "https://littleerica.herokuapp.com/img/LogoLE.png",
+  alt: "Logo Little Erica"
 })], -1 /* HOISTED */);
 var _hoisted_5 = {
   "class": "hidden md:block"
