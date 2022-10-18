@@ -27,12 +27,12 @@ class UserController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'can' => [
-                        'edit' => true //Auth::user()->can('edit', $user)
+                        'edit' => Auth::user()->can('edit', $user)
                     ]
                 ]),
             'filters' => Request::only(['search']),
             'can' => [
-                'createUser' => true //Auth::user()->can('create', User::class)
+                'createUser' => Auth::user()->can('create', User::class)
             ]
         ]);
     }
