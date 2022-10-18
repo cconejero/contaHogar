@@ -3,6 +3,7 @@ import {createInertiaApp, Link, Head} from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 import Layout from "./Shared/Layout";
 import '../css/app.css';
+import {Workbox} from 'workbox-window';
 
 createInertiaApp({
     resolve: async name => {
@@ -24,5 +25,11 @@ createInertiaApp({
 
     title: title => "My App - " + title,
 });
+
+if ('serviceWorker' in navigator) {
+    const wb = new Workbox('/service-worker.js');
+
+    wb.register();
+}
 
 InertiaProgress.init();

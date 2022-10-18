@@ -1,6 +1,7 @@
 // webpack.mix.js
 
 let mix = require("laravel-mix");
+require('laravel-mix-workbox');
 
 mix.js("resources/js/app.js", "public/js")
     .extract()
@@ -9,4 +10,7 @@ mix.js("resources/js/app.js", "public/js")
     })
     .disableNotifications()
     .postCss("resources/css/app.css", "public/css", [])
+    .generateSW({
+        maximumFileSizeToCacheInBytes: 3000000
+    })
     .version();
