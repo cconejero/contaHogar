@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Card;
+use App\Models\CardBrand;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Auth;
 
-class CardPolicy
+class CardBrandPolicy
 {
     use HandlesAuthorization;
 
@@ -19,19 +18,19 @@ class CardPolicy
      */
     public function viewAny(User $user)
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Card  $card
+     * @param  \App\Models\CardBrand  $cardBrand
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Card $card)
+    public function view(User $user, CardBrand $cardBrand)
     {
-        return ($card->user_id === $user->id);
+        return true;
     }
 
     /**
@@ -42,29 +41,29 @@ class CardPolicy
      */
     public function create(User $user)
     {
-        return Auth::user()->exists;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Card  $card
+     * @param  \App\Models\CardBrand  $cardBrand
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Card $card)
+    public function update(User $user, CardBrand $cardBrand)
     {
-        return ($card->user_id === $user->id);
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Card  $card
+     * @param  \App\Models\CardBrand  $cardBrand
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Card $card)
+    public function delete(User $user, CardBrand $cardBrand)
     {
         //
     }
@@ -73,10 +72,10 @@ class CardPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Card  $card
+     * @param  \App\Models\CardBrand  $cardBrand
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Card $card)
+    public function restore(User $user, CardBrand $cardBrand)
     {
         //
     }
@@ -85,10 +84,10 @@ class CardPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Card  $card
+     * @param  \App\Models\CardBrand  $cardBrand
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Card $card)
+    public function forceDelete(User $user, CardBrand $cardBrand)
     {
         //
     }

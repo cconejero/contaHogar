@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCardRequest;
 use App\Http\Requests\UpdateCardRequest;
+use App\Models\Bank;
 use App\Models\Card;
+use App\Models\CardBrand;
 use App\Models\CardSpend;
 use Carbon\Traits\Date;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +24,7 @@ class CardController extends Controller
     public function index()
     {
         return Inertia::render('Cards/Index', [
-            'cards' => Card::with('bank')
+            'cards' => Card::with(['bank', 'brand'])
                 ->whereUserId(Auth::user()->id)
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('name', 'like', '%' . $search . '%');
@@ -33,7 +35,7 @@ class CardController extends Controller
                     'id' => $card->id,
                     'name' => $card->name,
                     'bankName' => $card->bank->name,
-                    'brand' => $card->brand,
+                    'brand' => $card->brand->name,
                     'can' => [
                         'edit' => Auth::user()->can('update', $card),
                         'view' => Auth::user()->can('view', $card)
@@ -49,22 +51,35 @@ class CardController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        //
+        return Inertia::render('Cards/Create', [
+            'banks' => Bank::all(['id', 'name']),
+            'brands' => CardBrand::all(['id', 'name'])
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreCardRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(StoreCardRequest $request)
     {
-        //
+        $attributes = Request::validate([
+            'name' => 'required',
+            'bank_id' => 'required',
+            'card_brand_id' => 'required'
+        ]);
+
+        $attributes['user_id'] = Auth::user()->id;
+
+        Card::create($attributes);
+
+        return redirect('/cards');
     }
 
     /**
@@ -89,7 +104,10 @@ class CardController extends Controller
         if (Auth::user()->can('view', $card)){
             return Inertia::render('Cards/Show', [
                 'card' => $card->only(
-                    'id', 'name', 'brand'
+                    'id', 'name'
+                ),
+                'brand' => $card->brand->only(
+                    'name'
                 ),
                 'bank' => $card->bank->only(
                     'name'

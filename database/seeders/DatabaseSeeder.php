@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Bank;
 use App\Models\Card;
+use App\Models\CardBrand;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -35,32 +36,40 @@ class DatabaseSeeder extends Seeder
             'name' => 'Patagonia'
         ]);
 
+        $visa = CardBrand::factory()->create([
+            'name' => 'Visa'
+        ]);
+
+        $master = CardBrand::factory()->create([
+            'name' => 'Master'
+        ]);
+
         Card::factory()->create([
             'bank_id' => $patagonia,
             'user_id' => $claudio,
+            'card_brand_id' => $visa,
             'name' => 'Visa Claudio',
-            'brand' => 'Visa'
         ]);
 
         Card::factory()->create([
             'bank_id' => $patagonia,
             'user_id' => $claudio,
+            'card_brand_id' => $master,
             'name' => 'Master Claudio',
-            'brand' => 'Master'
         ]);
 
         Card::factory()->create([
             'bank_id' => $patagonia,
             'user_id' => $claudio,
+            'card_brand_id' => $visa,
             'name' => 'Visa Vikky',
-            'brand' => 'Visa'
         ]);
 
         Card::factory()->create([
             'bank_id' => $patagonia,
             'user_id' => $claudio,
+            'card_brand_id' => $master,
             'name' => 'Master Vikky',
-            'brand' => 'Master'
         ]);
 
         $frances = Bank::factory()->create([
@@ -70,15 +79,15 @@ class DatabaseSeeder extends Seeder
         Card::factory()->create([
             'bank_id' => $frances,
             'user_id' => $claudio,
+            'card_brand_id' => $visa,
             'name' => 'Visa Frances',
-            'brand' => 'Visa'
         ]);
 
         Card::factory()->create([
             'bank_id' => $frances,
             'user_id' => $pepe,
+            'card_brand_id' => $master,
             'name' => 'Esta no va.',
-            'brand' => 'Master'
         ]);
 
         Bank::factory()->create([

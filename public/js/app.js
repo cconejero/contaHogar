@@ -592,6 +592,16 @@ var map = {
 		"./resources/js/Pages/CardSpends/Create.vue",
 		"resources_js_Pages_CardSpends_Create_vue"
 	],
+	"./Cards/Create": [
+		"./resources/js/Pages/Cards/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Cards_Create_vue"
+	],
+	"./Cards/Create.vue": [
+		"./resources/js/Pages/Cards/Create.vue",
+		"/js/vendor",
+		"resources_js_Pages_Cards_Create_vue"
+	],
 	"./Cards/Index": [
 		"./resources/js/Pages/Cards/Index.vue",
 		"/js/vendor",

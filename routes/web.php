@@ -4,9 +4,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CardSpendController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+Route::post('/cards', [CardController::class, 'store']);
 
 Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/cards', [CardController::class, 'index']);
+    Route::get('/cards/create', [CardController::class, 'create']);
     Route::get('/cards/{card}', [CardController::class, 'show']);
 
     Route::get('/cards/{card}/spends/create', [CardSpendController::class, 'create']);
