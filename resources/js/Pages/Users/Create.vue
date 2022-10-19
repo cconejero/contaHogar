@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <head title="Create User"/>
 
     <h1 class="text-3xl">Create New User</h1>
@@ -66,11 +67,13 @@
         </div>
 
     </form>
+    </Layout>
 </template>
 
 <script setup>
 
 import {useForm} from "@inertiajs/inertia-vue3"
+import Layout from "../../Shared/Layout";
 
 let form = useForm({
     name: '',

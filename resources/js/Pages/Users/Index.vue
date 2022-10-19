@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <Head title="Usuarios" />
 
     <div class="flex justify-between items-center mb-6">
@@ -64,6 +65,7 @@
     </div>
 
     <Pagination :links="users.links" class="mt-6" />
+    </Layout>
 </template>
 
 <script setup>
@@ -71,6 +73,7 @@ import Pagination from "../../Shared/Pagination";
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { debounce } from "lodash";
+import Layout from "../../Shared/Layout";
 
 let props = defineProps({
     users: Object,

@@ -1,20 +1,10 @@
 import { createApp, h } from 'vue'
 import {createInertiaApp, Link, Head} from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
-import Layout from "./Shared/Layout";
 import '../css/app.css';
-import {Workbox} from 'workbox-window';
 
 createInertiaApp({
-    resolve: async name => {
-        let page = (await import(`./Pages/${name}`)).default;
-
-        if (page.layout === undefined){
-            page.layout = Layout;
-        }
-
-        return page;
-    },
+    resolve: async name => require(`./Pages/${name}`),
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
@@ -23,13 +13,8 @@ createInertiaApp({
             .mount(el)
     },
 
-    title: title => "My App - " + title,
+    title: title => "Little Erica - " + title,
 });
 
-if ('serviceWorker' in navigator) {
-    const wb = new Workbox('/service-worker.js');
-
-    wb.register();
-}
 
 InertiaProgress.init();

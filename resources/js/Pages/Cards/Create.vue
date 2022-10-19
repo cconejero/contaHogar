@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <head title="Crear Tarjeta"/>
 
     <h1 class="text-3xl">Crear Tarjeta</h1>
@@ -57,12 +58,14 @@
         </div>
 
     </form>
+    </Layout>
 </template>
 
 <script setup>
 
 import {useForm} from "@inertiajs/inertia-vue3"
 import Radio from "../../Shared/Radio"
+import Layout from "../../Shared/Layout";
 
 let form = useForm({
     name: '',

@@ -5,34 +5,31 @@
     "dev": "npx mix watch"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.2.0",
-    "@fortawesome/free-brands-svg-icons": "^6.2.0",
-    "@fortawesome/vue-fontawesome": "^3.0.1",
     "@headlessui/vue": "^1.7.3",
     "@heroicons/vue": "^2.0.12",
     "@inertiajs/inertia": "^0.11.1",
     "@inertiajs/inertia-vue3": "^0.6.0",
     "@inertiajs/progress": "^0.2.7",
+    "@vue/cli-service": "^5.0.8",
     "register-service-worker": "^1.7.2",
     "vue": "^3.2.36"
   },
   "devDependencies": {
-    "@sentry/webpack-plugin": "^1.19.1",
     "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/compiler-sfc": "^3.2.40",
     "autoprefixer": "^10.4.12",
     "axios": "^0.27",
     "laravel-mix": "^6.0.49",
+    "laravel-mix-compress": "^3.0.0",
     "laravel-mix-workbox": "^0.1.4",
-    "laravel-vite-plugin": "^0.6.0",
     "less": "^4.1.3",
     "less-loader": "^11.1.0",
     "lodash": "^4.17.19",
     "postcss": "^8.4.18",
     "postcss-custom-properties": "^12.1.9",
     "prettier": "^2.7.1",
-    "sass-resources-loader": "^2.2.5",
     "tailwindcss": "^3.1.8",
+    "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
     "vue-loader": "^16.8.3"
   }
 }

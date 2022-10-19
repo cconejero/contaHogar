@@ -1,4 +1,12 @@
 "use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_PWAPrompt_vue"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/PWAPrompt.vue?vue&type=script&lang=js":
@@ -7,42 +15,7 @@
   \**********************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      shown: false
-    };
-  },
-  beforeMount: function beforeMount() {
-    var _this = this;
-    window.addEventListener('beforeinstallprompt', function (e) {
-      e.preventDefault();
-      _this.installEvent = e;
-      _this.shown = true;
-    });
-  },
-  methods: {
-    dismissPrompt: function dismissPrompt() {
-      this.shown = false;
-    },
-    installPWA: function installPWA() {
-      var _this2 = this;
-      this.installEvent.prompt();
-      this.installEvent.userChoice.then(function (choice) {
-        _this2.dismissPrompt(); // Hide the prompt once the user's clicked
-        if (choice.outcome === 'accepted') {
-          // Do something additional if the user chose to install
-        } else {
-          // Do something additional if the user declined
-        }
-      });
-    }
-  }
-});
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  data: function data() {\n    return {\n      shown: false\n    };\n  },\n  beforeMount: function beforeMount() {\n    var _this = this;\n    window.addEventListener('beforeinstallprompt', function (e) {\n      e.preventDefault();\n      _this.installEvent = e;\n      _this.shown = true;\n    });\n  },\n  methods: {\n    dismissPrompt: function dismissPrompt() {\n      this.shown = false;\n    },\n    installPWA: function installPWA() {\n      var _this2 = this;\n      this.installEvent.prompt();\n      this.installEvent.userChoice.then(function (choice) {\n        _this2.dismissPrompt(); // Hide the prompt once the user's clicked\n        if (choice.outcome === 'accepted') {\n          // Do something additional if the user chose to install\n        } else {\n          // Do something additional if the user declined\n        }\n      });\n    }\n  }\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/Y2xvbmVkUnVsZVNldC01LnVzZVswXSEuL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2Rpc3QvaW5kZXguanM/P3J1bGVTZXRbMF0udXNlWzBdIS4vcmVzb3VyY2VzL2pzL1BhZ2VzL1BXQVByb21wdC52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMuanMiLCJtYXBwaW5ncyI6Ijs7OztBQWVBLGlFQUFlO0VBQ1hBLElBQUksRUFBRTtJQUFBLE9BQU87TUFDVEMsS0FBSyxFQUFFO0lBQ1gsQ0FBQztFQUFBLENBQUM7RUFFRkMsV0FBVyx5QkFBRztJQUFBO0lBQ1ZDLE1BQU0sQ0FBQ0MsZ0JBQWdCLENBQUMscUJBQXFCLEVBQUUsVUFBQ0MsQ0FBQyxFQUFLO01BQ2xEQSxDQUFDLENBQUNDLGNBQWMsRUFBQztNQUNqQixLQUFJLENBQUNDLFlBQVcsR0FBSUY7TUFDcEIsS0FBSSxDQUFDSixLQUFJLEdBQUksSUFBRztJQUNwQixDQUFDO0VBQ0wsQ0FBQztFQUVETyxPQUFPLEVBQUU7SUFDTEMsYUFBYSwyQkFBRztNQUNaLElBQUksQ0FBQ1IsS0FBSSxHQUFJLEtBQUk7SUFDckIsQ0FBQztJQUVEUyxVQUFVLHdCQUFHO01BQUE7TUFDVCxJQUFJLENBQUNILFlBQVksQ0FBQ0ksTUFBTSxFQUFDO01BQ3pCLElBQUksQ0FBQ0osWUFBWSxDQUFDSyxVQUFVLENBQUNDLElBQUksQ0FBQyxVQUFDQyxNQUFNLEVBQUs7UUFDMUMsTUFBSSxDQUFDTCxhQUFhLEVBQUMsRUFBRTtRQUNyQixJQUFJSyxNQUFNLENBQUNDLE9BQU0sS0FBTSxVQUFVLEVBQUU7VUFDL0I7UUFDSixPQUFPO1VBQ0g7UUFDSjtNQUNKLENBQUM7SUFDTDtFQUNKO0FBQ0osQ0FBQyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3Jlc291cmNlcy9qcy9QYWdlcy9QV0FQcm9tcHQudnVlPzIzYjIiXSwic291cmNlc0NvbnRlbnQiOlsiPHRlbXBsYXRlPlxuICAgIDxkaXYgdi1pZj1cInNob3duXCI+XG4gICAgICAgIEFncmVnYXIgYWwgaW5pY2lvP1xuXG4gICAgICAgIDxidXR0b24gQGNsaWNrPVwiaW5zdGFsbFBXQVwiPlxuICAgICAgICAgICAgU2khIVxuICAgICAgICA8L2J1dHRvbj5cblxuICAgICAgICA8YnV0dG9uIEBjbGljaz1cImRpc21pc3NQcm9tcHRcIj5cbiAgICAgICAgICAgIE5vLCBncmFjaWFzLlxuICAgICAgICA8L2J1dHRvbj5cbiAgICA8L2Rpdj5cbjwvdGVtcGxhdGU+XG5cbjxzY3JpcHQ+XG5leHBvcnQgZGVmYXVsdCB7XG4gICAgZGF0YTogKCkgPT4gKHtcbiAgICAgICAgc2hvd246IGZhbHNlLFxuICAgIH0pLFxuXG4gICAgYmVmb3JlTW91bnQoKSB7XG4gICAgICAgIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdiZWZvcmVpbnN0YWxscHJvbXB0JywgKGUpID0+IHtcbiAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKVxuICAgICAgICAgICAgdGhpcy5pbnN0YWxsRXZlbnQgPSBlXG4gICAgICAgICAgICB0aGlzLnNob3duID0gdHJ1ZVxuICAgICAgICB9KVxuICAgIH0sXG5cbiAgICBtZXRob2RzOiB7XG4gICAgICAgIGRpc21pc3NQcm9tcHQoKSB7XG4gICAgICAgICAgICB0aGlzLnNob3duID0gZmFsc2VcbiAgICAgICAgfSxcblxuICAgICAgICBpbnN0YWxsUFdBKCkge1xuICAgICAgICAgICAgdGhpcy5pbnN0YWxsRXZlbnQucHJvbXB0KClcbiAgICAgICAgICAgIHRoaXMuaW5zdGFsbEV2ZW50LnVzZXJDaG9pY2UudGhlbigoY2hvaWNlKSA9PiB7XG4gICAgICAgICAgICAgICAgdGhpcy5kaXNtaXNzUHJvbXB0KCkgLy8gSGlkZSB0aGUgcHJvbXB0IG9uY2UgdGhlIHVzZXIncyBjbGlja2VkXG4gICAgICAgICAgICAgICAgaWYgKGNob2ljZS5vdXRjb21lID09PSAnYWNjZXB0ZWQnKSB7XG4gICAgICAgICAgICAgICAgICAgIC8vIERvIHNvbWV0aGluZyBhZGRpdGlvbmFsIGlmIHRoZSB1c2VyIGNob3NlIHRvIGluc3RhbGxcbiAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAvLyBEbyBzb21ldGhpbmcgYWRkaXRpb25hbCBpZiB0aGUgdXNlciBkZWNsaW5lZFxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH0pXG4gICAgICAgIH0sXG4gICAgfVxufVxuPC9zY3JpcHQ+XG4iXSwibmFtZXMiOlsiZGF0YSIsInNob3duIiwiYmVmb3JlTW91bnQiLCJ3aW5kb3ciLCJhZGRFdmVudExpc3RlbmVyIiwiZSIsInByZXZlbnREZWZhdWx0IiwiaW5zdGFsbEV2ZW50IiwibWV0aG9kcyIsImRpc21pc3NQcm9tcHQiLCJpbnN0YWxsUFdBIiwicHJvbXB0IiwidXNlckNob2ljZSIsInRoZW4iLCJjaG9pY2UiLCJvdXRjb21lIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/PWAPrompt.vue?vue&type=script&lang=js\n");
 
 /***/ }),
 
@@ -52,26 +25,7 @@ __webpack_require__.r(__webpack_exports__);
   \**************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
-var _hoisted_1 = {
-  key: 0
-};
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return _ctx.shown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Agregar al inicio? "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[0] || (_cache[0] = function () {
-      return $options.installPWA && $options.installPWA.apply($options, arguments);
-    })
-  }, " Si!! "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[1] || (_cache[1] = function () {
-      return $options.dismissPrompt && $options.dismissPrompt.apply($options, arguments);
-    })
-  }, " No, gracias. ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
-}
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"render\": () => (/* binding */ render)\n/* harmony export */ });\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.esm-bundler.js\");\n\nvar _hoisted_1 = {\n  key: 0\n};\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return _ctx.shown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(\"div\", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(\" Agregar al inicio? \"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)(\"button\", {\n    onClick: _cache[0] || (_cache[0] = function () {\n      return $options.installPWA && $options.installPWA.apply($options, arguments);\n    })\n  }, \" Si!! \"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)(\"button\", {\n    onClick: _cache[1] || (_cache[1] = function () {\n      return $options.dismissPrompt && $options.dismissPrompt.apply($options, arguments);\n    })\n  }, \" No, gracias. \")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(\"v-if\", true);\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/Y2xvbmVkUnVsZVNldC01LnVzZVswXSEuL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2Rpc3QvdGVtcGxhdGVMb2FkZXIuanM/P3J1bGVTZXRbMV0ucnVsZXNbMl0hLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9kaXN0L2luZGV4LmpzPz9ydWxlU2V0WzBdLnVzZVswXSEuL3Jlc291cmNlcy9qcy9QYWdlcy9QV0FQcm9tcHQudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPWE4YTkxYTM2LmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7U0FDZUEsVUFBSyxzREFBaEJDLHVEQUFBQSxDQVVNLHlFQVZZLHNCQUdkLDJEQUVTO0lBRkFDLE9BQUs7TUFBQSxPQUFFQyxxRUFBVTtJQUFBO0tBQUUsUUFFNUIsR0FFQUMsdURBQUFBLENBRVM7SUFGQUYsT0FBSztNQUFBLE9BQUVDLDJFQUFhO0lBQUE7S0FBRSxnQkFFL0IiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvUGFnZXMvUFdBUHJvbXB0LnZ1ZT8yM2IyIl0sInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cbiAgICA8ZGl2IHYtaWY9XCJzaG93blwiPlxuICAgICAgICBBZ3JlZ2FyIGFsIGluaWNpbz9cblxuICAgICAgICA8YnV0dG9uIEBjbGljaz1cImluc3RhbGxQV0FcIj5cbiAgICAgICAgICAgIFNpISFcbiAgICAgICAgPC9idXR0b24+XG5cbiAgICAgICAgPGJ1dHRvbiBAY2xpY2s9XCJkaXNtaXNzUHJvbXB0XCI+XG4gICAgICAgICAgICBObywgZ3JhY2lhcy5cbiAgICAgICAgPC9idXR0b24+XG4gICAgPC9kaXY+XG48L3RlbXBsYXRlPlxuXG48c2NyaXB0PlxuZXhwb3J0IGRlZmF1bHQge1xuICAgIGRhdGE6ICgpID0+ICh7XG4gICAgICAgIHNob3duOiBmYWxzZSxcbiAgICB9KSxcblxuICAgIGJlZm9yZU1vdW50KCkge1xuICAgICAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignYmVmb3JlaW5zdGFsbHByb21wdCcsIChlKSA9PiB7XG4gICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KClcbiAgICAgICAgICAgIHRoaXMuaW5zdGFsbEV2ZW50ID0gZVxuICAgICAgICAgICAgdGhpcy5zaG93biA9IHRydWVcbiAgICAgICAgfSlcbiAgICB9LFxuXG4gICAgbWV0aG9kczoge1xuICAgICAgICBkaXNtaXNzUHJvbXB0KCkge1xuICAgICAgICAgICAgdGhpcy5zaG93biA9IGZhbHNlXG4gICAgICAgIH0sXG5cbiAgICAgICAgaW5zdGFsbFBXQSgpIHtcbiAgICAgICAgICAgIHRoaXMuaW5zdGFsbEV2ZW50LnByb21wdCgpXG4gICAgICAgICAgICB0aGlzLmluc3RhbGxFdmVudC51c2VyQ2hvaWNlLnRoZW4oKGNob2ljZSkgPT4ge1xuICAgICAgICAgICAgICAgIHRoaXMuZGlzbWlzc1Byb21wdCgpIC8vIEhpZGUgdGhlIHByb21wdCBvbmNlIHRoZSB1c2VyJ3MgY2xpY2tlZFxuICAgICAgICAgICAgICAgIGlmIChjaG9pY2Uub3V0Y29tZSA9PT0gJ2FjY2VwdGVkJykge1xuICAgICAgICAgICAgICAgICAgICAvLyBEbyBzb21ldGhpbmcgYWRkaXRpb25hbCBpZiB0aGUgdXNlciBjaG9zZSB0byBpbnN0YWxsXG4gICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgLy8gRG8gc29tZXRoaW5nIGFkZGl0aW9uYWwgaWYgdGhlIHVzZXIgZGVjbGluZWRcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9KVxuICAgICAgICB9LFxuICAgIH1cbn1cbjwvc2NyaXB0PlxuIl0sIm5hbWVzIjpbIl9jdHgiLCJfY3JlYXRlRWxlbWVudEJsb2NrIiwib25DbGljayIsIiRvcHRpb25zIiwiX2NyZWF0ZUVsZW1lbnRWTm9kZSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/PWAPrompt.vue?vue&type=template&id=a8a91a36\n");
 
 /***/ }),
 
@@ -81,24 +35,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _PWAPrompt_vue_vue_type_template_id_a8a91a36__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PWAPrompt.vue?vue&type=template&id=a8a91a36 */ "./resources/js/Pages/PWAPrompt.vue?vue&type=template&id=a8a91a36");
-/* harmony import */ var _PWAPrompt_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PWAPrompt.vue?vue&type=script&lang=js */ "./resources/js/Pages/PWAPrompt.vue?vue&type=script&lang=js");
-/* harmony import */ var _home_cconejero_PhpstormProjects_contahogar_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
-
-
-
-
-;
-const __exports__ = /*#__PURE__*/(0,_home_cconejero_PhpstormProjects_contahogar_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_PWAPrompt_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_PWAPrompt_vue_vue_type_template_id_a8a91a36__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/PWAPrompt.vue"]])
-/* hot reload */
-if (false) {}
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _PWAPrompt_vue_vue_type_template_id_a8a91a36__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PWAPrompt.vue?vue&type=template&id=a8a91a36 */ \"./resources/js/Pages/PWAPrompt.vue?vue&type=template&id=a8a91a36\");\n/* harmony import */ var _PWAPrompt_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PWAPrompt.vue?vue&type=script&lang=js */ \"./resources/js/Pages/PWAPrompt.vue?vue&type=script&lang=js\");\n/* harmony import */ var _home_cconejero_PhpstormProjects_contahogar_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ \"./node_modules/vue-loader/dist/exportHelper.js\");\n\n\n\n\n;\nconst __exports__ = /*#__PURE__*/(0,_home_cconejero_PhpstormProjects_contahogar_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(_PWAPrompt_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"], [['render',_PWAPrompt_vue_vue_type_template_id_a8a91a36__WEBPACK_IMPORTED_MODULE_0__.render],['__file',\"resources/js/Pages/PWAPrompt.vue\"]])\n/* hot reload */\nif (false) {}\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvUGFnZXMvUFdBUHJvbXB0LnZ1ZS5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQXNFO0FBQ1Y7QUFDTDs7QUFFdkQsQ0FBc0g7QUFDdEgsaUNBQWlDLG9JQUFlLENBQUMsOEVBQU0sYUFBYSxnRkFBTTtBQUMxRTtBQUNBLElBQUksS0FBVSxFQUFFLEVBY2Y7OztBQUdELGlFQUFlIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vcmVzb3VyY2VzL2pzL1BhZ2VzL1BXQVByb21wdC52dWU/ZmMxZSJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyByZW5kZXIgfSBmcm9tIFwiLi9QV0FQcm9tcHQudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPWE4YTkxYTM2XCJcbmltcG9ydCBzY3JpcHQgZnJvbSBcIi4vUFdBUHJvbXB0LnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qc1wiXG5leHBvcnQgKiBmcm9tIFwiLi9QV0FQcm9tcHQudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzXCJcblxuaW1wb3J0IGV4cG9ydENvbXBvbmVudCBmcm9tIFwiL2hvbWUvY2NvbmVqZXJvL1BocHN0b3JtUHJvamVjdHMvY29udGFob2dhci9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9kaXN0L2V4cG9ydEhlbHBlci5qc1wiXG5jb25zdCBfX2V4cG9ydHNfXyA9IC8qI19fUFVSRV9fKi9leHBvcnRDb21wb25lbnQoc2NyaXB0LCBbWydyZW5kZXInLHJlbmRlcl0sWydfX2ZpbGUnLFwicmVzb3VyY2VzL2pzL1BhZ2VzL1BXQVByb21wdC52dWVcIl1dKVxuLyogaG90IHJlbG9hZCAqL1xuaWYgKG1vZHVsZS5ob3QpIHtcbiAgX19leHBvcnRzX18uX19obXJJZCA9IFwiYThhOTFhMzZcIlxuICBjb25zdCBhcGkgPSBfX1ZVRV9ITVJfUlVOVElNRV9fXG4gIG1vZHVsZS5ob3QuYWNjZXB0KClcbiAgaWYgKCFhcGkuY3JlYXRlUmVjb3JkKCdhOGE5MWEzNicsIF9fZXhwb3J0c19fKSkge1xuICAgIGNvbnNvbGUubG9nKCdyZWxvYWQnKVxuICAgIGFwaS5yZWxvYWQoJ2E4YTkxYTM2JywgX19leHBvcnRzX18pXG4gIH1cbiAgXG4gIG1vZHVsZS5ob3QuYWNjZXB0KFwiLi9QV0FQcm9tcHQudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPWE4YTkxYTM2XCIsICgpID0+IHtcbiAgICBjb25zb2xlLmxvZygncmUtcmVuZGVyJylcbiAgICBhcGkucmVyZW5kZXIoJ2E4YTkxYTM2JywgcmVuZGVyKVxuICB9KVxuXG59XG5cblxuZXhwb3J0IGRlZmF1bHQgX19leHBvcnRzX18iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/Pages/PWAPrompt.vue\n");
 
 /***/ }),
 
@@ -108,12 +45,7 @@ if (false) {}
   \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PWAPrompt_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PWAPrompt_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PWAPrompt.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/PWAPrompt.vue?vue&type=script&lang=js");
- 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PWAPrompt_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PWAPrompt_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PWAPrompt.vue?vue&type=script&lang=js */ \"./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/PWAPrompt.vue?vue&type=script&lang=js\");\n //# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvUGFnZXMvUFdBUHJvbXB0LnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcy5qcyIsIm1hcHBpbmdzIjoiOzs7OztBQUE4TSIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3Jlc291cmNlcy9qcy9QYWdlcy9QV0FQcm9tcHQudnVlPzA2Y2MiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IHsgZGVmYXVsdCB9IGZyb20gXCItIS4uLy4uLy4uL25vZGVfbW9kdWxlcy9iYWJlbC1sb2FkZXIvbGliL2luZGV4LmpzPz9jbG9uZWRSdWxlU2V0LTUudXNlWzBdIS4uLy4uLy4uL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2Rpc3QvaW5kZXguanM/P3J1bGVTZXRbMF0udXNlWzBdIS4vUFdBUHJvbXB0LnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qc1wiOyBleHBvcnQgKiBmcm9tIFwiLSEuLi8uLi8uLi9ub2RlX21vZHVsZXMvYmFiZWwtbG9hZGVyL2xpYi9pbmRleC5qcz8/Y2xvbmVkUnVsZVNldC01LnVzZVswXSEuLi8uLi8uLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9kaXN0L2luZGV4LmpzPz9ydWxlU2V0WzBdLnVzZVswXSEuL1BXQVByb21wdC52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anNcIiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/js/Pages/PWAPrompt.vue?vue&type=script&lang=js\n");
 
 /***/ }),
 

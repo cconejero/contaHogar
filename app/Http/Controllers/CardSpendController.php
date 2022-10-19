@@ -32,7 +32,7 @@ class CardSpendController extends Controller
      */
     public function create(Card $card)
     {
-        return Inertia::render('CardSpends/Create', [
+        return Inertia::render('Cards/Spends/Create', [
             'card' => $card->only(
                 'id', 'name'
             )

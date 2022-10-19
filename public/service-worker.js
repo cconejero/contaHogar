@@ -82,46 +82,17 @@ define(['./workbox-8b6cdeda'], (function (workbox) { 'use strict';
    */
   workbox.precacheAndRoute([{
     "url": "/js/app.js",
-    "revision": "3a16de665e88641e098df7b1d237122d"
+    "revision": "7f7cea033596bebf39a5814875175ba3"
   }, {
     "url": "/js/manifest.js",
-    "revision": "823515a4471641ad511086b41dc62197"
+    "revision": "9cc2062e81f477563f0c154a31924b1f"
   }, {
     "url": "/js/vendor.js",
-    "revision": "c43fa8edbae0b4440b236c2b928d709e"
+    "revision": "0b0051fc4a4542d17e46a8124d16a56d"
   }, {
     "url": "css/app.css",
-    "revision": "704527470ef2213758d85fb10c5d39ac"
-  }, {
-    "url": "js/resources_js_Pages_Auth_Login_vue.js",
-    "revision": "2ac08fa1bac42350ab5f1c56efff6ae5"
-  }, {
-    "url": "js/resources_js_Pages_CardSpends_Create_vue.js",
-    "revision": "9606b069a5cd226368eddef7c7080343"
-  }, {
-    "url": "js/resources_js_Pages_Cards_Create_vue.js",
-    "revision": "1c18ea0b0b538e3d6e8616108e6a6dd7"
-  }, {
-    "url": "js/resources_js_Pages_Cards_Index_vue.js",
-    "revision": "462fd76f80ba3aef47be30fa241fead4"
-  }, {
-    "url": "js/resources_js_Pages_Cards_Show_vue.js",
-    "revision": "95e23ea4f91eedb6307864916e19f733"
-  }, {
-    "url": "js/resources_js_Pages_Home_vue.js",
-    "revision": "653c1dbd91e28e6a38c23ebb49dc487d"
-  }, {
-    "url": "js/resources_js_Pages_PWAPrompt_vue.js",
-    "revision": "b8729507834b9df8484546517fb414c6"
-  }, {
-    "url": "js/resources_js_Pages_Settings_vue.js",
-    "revision": "01e35f123d9959352c78404036dc1819"
-  }, {
-    "url": "js/resources_js_Pages_Users_Create_vue.js",
-    "revision": "ac36f37775dfa565c4b504c307fdcafa"
-  }, {
-    "url": "js/resources_js_Pages_Users_Index_vue.js",
-    "revision": "098a4723957a09d072676a2fb9b07310"
+    "revision": "6980e4af0da7b92312e3590cc7df833e"
   }], {});
 
 }));
+//# sourceMappingURL=service-worker.js.map

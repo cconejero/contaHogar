@@ -1,6 +1,7 @@
 {
     "short_name": "Little Erica",
     "name": "Little Erica: Sistema Contable Hogareño",
+    "background_color": "#F3F4F6",
     "icons": [
         {
             "src": "/img/LE192.png",

@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <head title="Crear Gasto en Tarjeta"/>
 
     <h1 class="text-3xl">Crear Gasto en {{ card.name }}</h1>
@@ -26,7 +27,7 @@
             <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                    for="amount"
             >
-                Cuota
+                Valor de Cuota
             </label>
 
             <input v-model="form.amount"
@@ -117,11 +118,13 @@
         </div>
 
     </form>
+    </Layout>
 </template>
 
 <script setup>
 
 import {useForm} from "@inertiajs/inertia-vue3"
+import Layout from "../../../Shared/Layout";
 
 let form = useForm({
     description: '',

@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <Head title="Tarjetas" />
 
     <div class="flex justify-between items-center mb-6">
@@ -96,11 +97,12 @@
     </div>
 
     <Pagination :links="spends.links" class="mt-6" />
-
+    </Layout>
 </template>
 
 <script setup>
 import Pagination from "../../Shared/Pagination";
+import Layout from "../../Shared/Layout";
 
 let props = defineProps({
     card: Object,
@@ -146,8 +148,8 @@ let prevYear = () => {
     if (props.month > 1){
         return props.year;
     } else {
-        let prev = props.month;
-        prev ++;
+        let prev = props.year;
+        prev --;
         return prev;
     }
 }

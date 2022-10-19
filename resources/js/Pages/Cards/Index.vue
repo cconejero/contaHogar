@@ -1,4 +1,5 @@
 <template>
+    <Layout>
     <Head title="Tarjetas" />
 
     <div class="flex justify-between items-center mb-6">
@@ -38,8 +39,6 @@
                                         <div
                                             class="text-sm font-medium text-gray-900 flex items-center"
                                         >
-                                            <font-awesome-icon v-if="card.brand === 'Visa'" icon="fa-brands fa-cc-visa" />
-                                            <font-awesome-icon v-if="card.brand === 'Master'" icon="fa-brands fa-cc-mastercard" />
                                             <Link v-if="card.can.view"
                                                   :href="`/cards/${card.id}`"
                                                   class="text-indigo-600 hover:text-indigo-900 ml-4"
@@ -81,6 +80,7 @@
     </div>
 
     <Pagination :links="cards.links" class="mt-6" />
+    </Layout>
 </template>
 
 <script setup>
@@ -88,12 +88,7 @@ import Pagination from "../../Shared/Pagination";
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { debounce } from "lodash";
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faCcVisa } from '@fortawesome/free-brands-svg-icons'
-import { faCcMastercard } from '@fortawesome/free-brands-svg-icons'
-
-library.add(faCcVisa, faCcMastercard);
+import Layout from "../../Shared/Layout";
 
 let props = defineProps({
     cards: Object,
