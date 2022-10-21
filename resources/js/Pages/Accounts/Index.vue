@@ -1,16 +1,16 @@
 <template>
     <Layout>
-        <Head title="Usuarios" />
+        <Head title="Cuentas" />
 
         <div class="flex justify-between items-center mb-6">
             <div class="flex items-center">
-                <h1 class="text-3xl">Usuarios</h1>
+                <h1 class="text-3xl">Cuentas</h1>
 
                 <Link
-                    v-if="can.createUser"
-                    href="/users/create"
+                    v-if="can.createAccount"
+                    href="/accounts/create"
                     class="text-blue-500 text-sm ml-3"
-                    >Nuevo Usuario</Link
+                >Nueva Cuenta</Link
                 >
             </div>
 
@@ -23,37 +23,46 @@
         </div>
 
         <Table>
-            <tr v-for="user in users.data" :key="user.id">
+            <tr v-for="account in accounts.data" :key="account.id">
                 <TableItem>
-                    {{ user.name }}
+                    <Link :href="'/accounts/' + account.id">
+                        {{ account.description }}
+                    </Link>
+                </TableItem>
+                <TableItem>
+                    {{ account.alias }}
+                </TableItem>
+                <TableItem>
+                    {{ account.cbu }}
                 </TableItem>
                 <TableItem>
                     <Link
-                        v-if="user.can.edit"
-                        :href="`/users/${user.id}/edit`"
+                        v-if="account.can.edit"
+                        :href="`/accounts/${account.id}/edit`"
                         class="text-indigo-600 hover:text-indigo-900"
                     >
-                        Edit
+                        Editar
                     </Link>
                 </TableItem>
             </tr>
         </Table>
-        <Pagination :links="users.links" class="mt-6" />
+        <Pagination :links="accounts.links" class="mt-6" />
 
     </Layout>
 </template>
 
 <script setup>
-import Pagination from "../../Shared/Pagination";
-import { ref, watch } from "vue";
-import { Inertia } from "@inertiajs/inertia";
-import { debounce } from "lodash";
+
 import Layout from "../../Shared/Layout";
+import Pagination from "../../Shared/Pagination";
 import Table from "../../Shared/Table";
 import TableItem from "../../Shared/TableItem";
+import {ref, watch} from "vue";
+import {debounce} from "lodash";
+import {Inertia} from "@inertiajs/inertia";
 
 let props = defineProps({
-    users: Object,
+    accounts: Object,
     filters: Object,
     can: Object,
 });
@@ -64,7 +73,7 @@ watch(
     search,
     debounce(function (value) {
         Inertia.get(
-            "/users",
+            "/accounts",
             { search: value },
             {
                 preserveState: true,

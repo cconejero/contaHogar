@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCardSpendRequest;
 use App\Http\Requests\UpdateCardSpendRequest;
 use App\Models\Card;
 use App\Models\CardSpend;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Request;
 

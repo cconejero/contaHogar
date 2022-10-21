@@ -41,7 +41,7 @@
                                         >
                                             <Link v-if="card.can.view"
                                                   :href="`/cards/${card.id}`"
-                                                  class="text-indigo-600 hover:text-indigo-900 ml-4"
+                                                  class="text-indigo-600 hover:text-indigo-900"
                                                   >{{ card.name }}</Link>
                                         </div>
                                     </div>

@@ -5,11 +5,10 @@
     <div class="flex justify-between items-center mb-6">
         <div class="flex items-baseline">
             <h1 class="text-3xl">Tarjeta</h1>
-            <span class="text-sm ml-4">Período {{ month }}/{{ year }}</span>
-        </div>
-        <div>
-            <Link :href="'/cards/' + card.id + '?mes=' + this.prevMonth() + '&anio=' + this.prevYear()" class="text-sm ml-4">Anterior</Link>
-            <Link :href="'/cards/' + card.id + '?mes=' + this.nextMonth() + '&anio=' + this.nextYear()" class="text-sm ml-4">Siguiente</Link>
+
+            <Link :href="'/cards/' + card.id + '?mes=' + this.prevMonth() + '&anio=' + this.prevYear()" class="text-sm ml-4">&laquo;</Link>
+            <span class="text-sm ml-2">Período {{ month }}/{{ year }}</span>
+            <Link :href="'/cards/' + card.id + '?mes=' + this.nextMonth() + '&anio=' + this.nextYear()" class="text-sm ml-2">&raquo;</Link>
         </div>
     </div>
 

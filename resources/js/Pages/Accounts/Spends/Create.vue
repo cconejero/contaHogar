@@ -1,0 +1,126 @@
+<template>
+    <Layout>
+        <head title="Crear Movimiento en Cuenta"/>
+
+        <h1 class="text-3xl">Crear Movimiento en {{ account.description }}</h1>
+
+        <form @submit.prevent="submit" class="mt-8 max-w-md mx-auto">
+
+            <div class="mb-6">
+                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                       for="movement_id"
+                >
+                    Tipo de Movimiento
+                </label>
+
+                <Radio :items="props.movements" v-model="form.movement_id"></Radio>
+
+                <div v-if="form.errors.movement_id" v-text="form.errors.movement_id" class="text-red-500 text-xs mt-1"></div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                       for="description"
+                >
+                    Descripcion
+                </label>
+
+                <input v-model="form.description"
+                       class="border rounded-xl border-gray-400 p-2 w-full"
+                       type="text"
+                       name="description"
+                       id="description"
+                       required
+                >
+                <div v-if="form.errors.description" v-text="form.errors.description" class="text-red-500 text-xs mt-1"></div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                       for="amount"
+                >
+                    Monto
+                </label>
+
+                <input v-model="form.amount"
+                       class="border rounded-xl border-gray-400 p-2 w-full"
+                       type="number"
+                       name="amount"
+                       id="amount"
+                       required
+                >
+                <div v-if="form.errors.amount" v-text="form.errors.amount" class="text-red-500 text-xs mt-1"></div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                       for="month"
+                >
+                    Período mes
+                </label>
+
+                <input v-model="form.month"
+                       class="border rounded-xl border-gray-400 p-2 w-full"
+                       type="number"
+                       name="month"
+                       id="month"
+
+                >
+                <div v-if="form.errors.month" v-text="form.errors.month" class="text-red-500 text-xs mt-1"></div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                       for="year"
+                >
+                    Período año
+                </label>
+
+                <input v-model="form.year"
+                       class="border rounded-xl border-gray-400 p-2 w-full"
+                       type="number"
+                       name="year"
+                       id="year"
+
+                >
+                <div v-if="form.errors.year" v-text="form.errors.year" class="text-red-500 text-xs mt-1"></div>
+            </div>
+
+            <div class="mb-6">
+                <button type="submit"
+                        class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
+                        :disabled="form.processing"
+                >
+                    Submit
+                </button>
+            </div>
+
+        </form>
+    </Layout>
+</template>
+
+<script setup>
+import Layout from "../../../Shared/Layout";
+import {useForm} from "@inertiajs/inertia-vue3";
+import Radio from "../../../Shared/Radio";
+
+
+let form = useForm({
+    movement_id: 2,
+    description: '',
+    amount: 0,
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+});
+
+let props = defineProps({
+    account: Object,
+    movements: Object
+});
+
+
+let submit = () => {
+    form.post('/accounts/' + props.account.id + '/spends');
+};
+
+</script>

@@ -82,7 +82,7 @@ define(['./workbox-8b6cdeda'], (function (workbox) { 'use strict';
    */
   workbox.precacheAndRoute([{
     "url": "/js/app.js",
-    "revision": "7f7cea033596bebf39a5814875175ba3"
+    "revision": "4f7c47f2e003c6a708808446d06bd105"
   }, {
     "url": "/js/manifest.js",
     "revision": "9cc2062e81f477563f0c154a31924b1f"
@@ -91,7 +91,7 @@ define(['./workbox-8b6cdeda'], (function (workbox) { 'use strict';
     "revision": "0b0051fc4a4542d17e46a8124d16a56d"
   }, {
     "url": "css/app.css",
-    "revision": "6980e4af0da7b92312e3590cc7df833e"
+    "revision": "cfa5f6671cc472a53fd8f916536de1a1"
   }], {});
 
 }));

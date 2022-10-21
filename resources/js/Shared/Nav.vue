@@ -85,7 +85,7 @@ const user = {
 const navigation = [
     { name: 'Inicio', href: '/', current: (usePage().component.value === "Home")},
     { name: 'Tarjetas', href: '/cards', current: (usePage().component.value === "Cards/Index") },
-    { name: 'Cuentas', href: '#', current: (usePage().component.value === "Accounts/Index") },
+    { name: 'Cuentas', href: '/accounts', current: (usePage().component.value === "Accounts/Index") },
     { name: 'Efectivo', href: '#', current: (usePage().component.value === "Cash/Index") },
     { name: 'Reportes', href: '#', current: (usePage().component.value === "Reports/index") },
 ]

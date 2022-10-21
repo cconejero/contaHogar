@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountSpendController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CardSpendController;
@@ -29,6 +31,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/cards/create', [CardController::class, 'create']);
     Route::post('/cards', [CardController::class, 'store']);
     Route::get('/cards/{card}', [CardController::class, 'show']);
+
+    Route::get('/accounts', [AccountController::class, 'index']);
+    Route::get('/accounts/create', [AccountController::class, 'create']);
+    Route::post('/accounts', [AccountController::class, 'store']);
+    Route::get('/accounts/{account}', [AccountController::class, 'show']);
+
+    Route::get('/accounts/{account}/spends/create', [AccountSpendController::class, 'create']);
+    Route::post('/accounts/{account}/spends', [AccountSpendController::class, 'store']);
 
     Route::get('/cards/{card}/spends/create', [CardSpendController::class, 'create']);
     Route::post('/cards/{card}/spends', [CardSpendController::class, 'store']);
