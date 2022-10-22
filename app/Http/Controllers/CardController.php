@@ -102,6 +102,9 @@ class CardController extends Controller
     public function show(Card $card)
     {
         if (Auth::user()->can('view', $card)){
+            $month = Request::input('mes') ? Request::input('mes') : now()->month;
+            $year = Request::input('anio') ? Request::input('anio') : now()->year;
+
             return Inertia::render('Cards/Show', [
                 'card' => $card->only(
                     'id', 'name'
@@ -114,6 +117,8 @@ class CardController extends Controller
                 ),
                 'spends' => CardSpend::query()
                     ->where('card_id', $card->id)
+                    ->where('month', $month)
+                    ->where('year', $year)
                     ->when(Request::input('anio'), function ($query, $year) {
                         $query->where('year', $year);
                     })
@@ -131,8 +136,8 @@ class CardController extends Controller
                         'sign' => $spend->currency->sign
                     ]
                 ),
-                'month' => Request::input('mes') ? Request::input('mes') : now()->month,
-                'year' => Request::input('anio') ? Request::input('anio') : now()->year,
+                'month' => $month,
+                'year' => $year,
             ]);
         } else {
             return abort(403);
