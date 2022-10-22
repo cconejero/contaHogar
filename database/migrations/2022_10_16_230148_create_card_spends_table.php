@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('card_id')->cascadeOnDelete();
             $table->string('description');
             $table->decimal('amount', 8, 2);
+            $table->foreignId('currency_id');
+            $table->boolean('fixed')->default(false);
             $table->unsignedSmallInteger('actual_due');
             $table->unsignedSmallInteger('total_due');
             $table->unsignedSmallInteger('month');

@@ -49,7 +49,7 @@
             <Link
                 :href="'/accounts/' + account.id + '/spends/create'"
                 class="text-blue-500 text-sm ml-3"
-            >Nuevo Ingreso</Link
+            >Nuevo Movimiento</Link
             >
 
         </div>

@@ -42,5 +42,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cards/{card}/spends/create', [CardSpendController::class, 'create']);
     Route::post('/cards/{card}/spends', [CardSpendController::class, 'store']);
+    Route::post('/cards/{card}/import', [CardSpendController::class, 'import']);
 
 });

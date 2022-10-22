@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class CardSpend extends Model
 {
     use HasFactory;
+    protected $with = ['currency', 'card'];
 
-    protected $guarded = [];
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
+
+    public function card()
+    {
+        return $this->belongsTo(Card::class);
+    }
+
 }

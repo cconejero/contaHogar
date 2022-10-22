@@ -127,6 +127,8 @@ class CardController extends Controller
                         'amount' => $spend->amount,
                         'actual_due' => $spend->actual_due,
                         'total_due' => $spend->total_due,
+                        'fixed' => $spend->fixed,
+                        'sign' => $spend->currency->sign
                     ]
                 ),
                 'month' => Request::input('mes') ? Request::input('mes') : now()->month,

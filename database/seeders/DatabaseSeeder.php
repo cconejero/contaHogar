@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
             'sign' => 'AR$'
         ]);
 
-        Currency::factory()->create([
+        $dolar = Currency::factory()->create([
             'name' => 'Dolar',
             'sign' => 'U$D'
         ]);
@@ -132,7 +132,7 @@ class DatabaseSeeder extends Seeder
             'cbu' => '0340230809230016904004',
             'bank_id' => $patagonia,
             'account_type_id' => $CA,
-            'currency_id' => $peso,
+            'currency_id' => $dolar,
             'user_id' => $claudio
         ]);
 
