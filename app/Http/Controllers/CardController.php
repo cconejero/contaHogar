@@ -105,6 +105,8 @@ class CardController extends Controller
             $month = Request::input('mes') ? Request::input('mes') : now()->month;
             $year = Request::input('anio') ? Request::input('anio') : now()->year;
 
+            Card::calculateImpuestoSellos($card, $month, $year);
+
             return Inertia::render('Cards/Show', [
                 'card' => $card->only(
                     'id', 'name'

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Type\Integer;
 
 class CardSpend extends Model
 {
@@ -19,5 +20,4 @@ class CardSpend extends Model
     {
         return $this->belongsTo(Card::class);
     }
-
 }
