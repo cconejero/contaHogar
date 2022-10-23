@@ -1,120 +1,82 @@
 <template>
     <Layout>
-    <Head title="Tarjetas" />
+        <Head title="Tarjetas" />
 
-    <div class="flex justify-between items-center mb-6">
-        <div class="flex items-baseline">
-            <h1 class="text-3xl">Tarjeta</h1>
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-baseline">
+                <h1 class="text-3xl">Tarjeta</h1>
 
-            <Link :href="'/cards/' + card.id + '?mes=' + this.prevMonth() + '&anio=' + this.prevYear()" class="text-sm ml-4">&laquo;</Link>
-            <span class="text-sm ml-2">Período {{ month }}/{{ year }}</span>
-            <Link :href="'/cards/' + card.id + '?mes=' + this.nextMonth() + '&anio=' + this.nextYear()" class="text-sm ml-2">&raquo;</Link>
-        </div>
-    </div>
-
-    <div class="overflow-hidden bg-white shadow sm:rounded-lg">
-        <div class="border-t border-gray-200">
-            <dl>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Nombre</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ card.name }}</dd>
-                </div>
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Marca</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ brand.name }}</dd>
-                </div>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Banco</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ bank.name }}</dd>
-                </div>
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Importar</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                        <Link class="text-blue-500"
-                              :href="'/cards/' + card.id + '/import?prevMonth=' + this.prevMonth() + '&prevYear=' + this.prevYear() + '&actualMonth=' + month + '&actualYear=' + year"
-                              method="post"
-                        >
-                            Importar gasto del período anterior.
-                        </Link>
-                    </dd>
-                </div>
-            </dl>
-        </div>
-    </div>
-
-    <div class="flex justify-between items-center my-6">
-        <div class="flex items-center">
-            <h1 class="text-3xl">Gastos</h1>
-
-            <Link
-                :href="'/cards/' + card.id + '/spends/create?mes=' + month + '&anio=' + year"
-                class="text-blue-500 text-sm ml-3"
-            >Nuevo Gasto</Link
-            >
-        </div>
-    </div>
-
-    <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div
-                class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
-            >
-                <div
-                    class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+                <Link
+                    :href="'/cards/' + card.id + '?mes=' + this.prevMonth() + '&anio=' + this.prevYear()"
+                    class="text-sm ml-4"
+                    >&laquo;</Link
                 >
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <tbody class="bg-white divide-y divide-gray-200">
-                        <tr v-for="cardSpend in spends.data" :key="cardSpend.id">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div>
-                                        <div
-                                            class="text-sm font-medium text-gray-900"
-                                        >
-                                            {{ cardSpend.description }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div>
-                                        <div
-                                            class="text-sm font-medium text-gray-900"
-                                        >
-                                            {{ cardSpend.sign }} {{ cardSpend.amount }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div>
-                                        <div
-                                            class="text-sm font-medium text-gray-900"
-                                        >
-                                            <span v-if="cardSpend.fixed">Gasto Fijo</span>
-                                            <span v-else>Cuota: {{ cardSpend.actual_due }} de {{ cardSpend.total_due }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <span class="text-sm ml-2">Período {{ month }}/{{ year }}</span>
+                <Link
+                    :href="'/cards/' + card.id + '?mes=' + this.nextMonth() + '&anio=' + this.nextYear()"
+                    class="text-sm ml-2"
+                    >&raquo;</Link
+                >
             </div>
         </div>
-    </div>
 
-    <Pagination :links="spends.links" class="mt-6" />
+        <View>
+            <ViewItem title="Nombre">{{ card.name }}</ViewItem>
+            <ViewItem title="Marca">{{ brand.name }}</ViewItem>
+            <ViewItem title="Banco">{{ bank.name }}</ViewItem>
+            <ViewItem title="Totales">
+                <div v-for="item in total">
+                    {{ item.currency }} {{ item.amount.toLocaleString('es-AR', {style: 'decimal', minimumFractionDigits: 2}) }}
+                </div>
+            </ViewItem>
+            <ViewItem title="Importar">
+                <Link
+                    class="text-blue-500"
+                    :href="'/cards/' + card.id + '/import?prevMonth=' + this.prevMonth() + '&prevYear=' + this.prevYear() + '&actualMonth=' + month + '&actualYear=' + year"
+                    method="post"
+                >
+                    Importar gasto del período anterior.
+                </Link>
+            </ViewItem>
+        </View>
+
+        <div class="flex justify-between items-center my-6">
+            <div class="flex items-center">
+                <h1 class="text-3xl">Gastos</h1>
+
+                <Link :href="'/cards/' + card.id + '/spends/create?mes=' + month + '&anio=' + year"
+                      class="text-blue-500 text-sm ml-3">Nuevo Gasto
+                </Link
+                >
+            </div>
+        </div>
+
+        <ViewDetail>
+            <tr v-for="cardSpend in spends.data"
+                :key="cardSpend.id"
+            >
+                <ViewDetailItem>{{ cardSpend.description }}</ViewDetailItem>
+                <ViewDetailItem>{{ cardSpend.sign }} {{ cardSpend.amount }}</ViewDetailItem>
+                <ViewDetailItem>
+                    <span v-if="cardSpend.fixed">Gasto Fijo</span>
+                    <span v-else>Cuota: {{ cardSpend.actual_due }} de {{ cardSpend.total_due }}</span>
+                </ViewDetailItem>
+            </tr>
+        </ViewDetail>
+
+        <Pagination :links="spends.links" class="mt-6" />
     </Layout>
 </template>
 
 <script setup>
 import Pagination from "../../Shared/Pagination";
-import {Link} from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 import Layout from "../../Shared/Layout";
+import _ from "lodash";
+import View from "../../Shared/View";
+import ViewItem from "../../Shared/ViewItem";
+import ViewDetail from "../../Shared/ViewDetail";
+import ViewDetailItem from "../../Shared/ViewDetailItem";
 
 let props = defineProps({
     card: Object,
@@ -123,47 +85,58 @@ let props = defineProps({
     spends: Object,
     month: Number,
     year: Number,
-    filters: Object
+    filters: Object,
 });
 
+let total = _(props.spends.data)
+    .groupBy("sign")
+    .map((objs, key) => {
+        return {
+            currency: key,
+            amount: _.sumBy(objs, function (o) {
+                return Number(o.amount);
+            }),
+        };
+    })
+    .value();
+
 let nextMonth = () => {
-    if (props.month < 12){
+    if (props.month < 12) {
         let next = props.month;
-        next ++;
+        next++;
         return next;
     } else {
-        return 1
+        return 1;
     }
-}
+};
 
 let prevMonth = () => {
-    if (props.month > 1){
+    if (props.month > 1) {
         let prev = props.month;
-        prev --;
+        prev--;
         return prev;
     } else {
-        return 12
+        return 12;
     }
-}
+};
 
 let nextYear = () => {
-    if (props.month < 12){
+    if (props.month < 12) {
         return props.year;
     } else {
         let next = props.year;
-        next ++;
+        next++;
         return next;
     }
-}
+};
 
 let prevYear = () => {
-    if (props.month > 1){
+    if (props.month > 1) {
         return props.year;
     } else {
         let prev = props.year;
-        prev --;
+        prev--;
         return prev;
     }
-}
-
+};
 </script>

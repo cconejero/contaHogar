@@ -133,7 +133,8 @@ class CardController extends Controller
                         'actual_due' => $spend->actual_due,
                         'total_due' => $spend->total_due,
                         'fixed' => $spend->fixed,
-                        'sign' => $spend->currency->sign
+                        'sign' => $spend->currency->sign,
+                        'currency_name' => $spend->currency->name
                     ]
                 ),
                 'month' => $month,
