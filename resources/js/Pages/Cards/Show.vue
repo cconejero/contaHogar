@@ -4,7 +4,7 @@
 
         <div class="flex justify-between items-center mb-6">
             <div class="flex items-baseline">
-                <h1 class="text-3xl">Tarjeta</h1>
+                <h1 class="text-3xl">{{ card.name }}</h1>
 
                 <Link
                     :href="'/cards/' + card.id + '?mes=' + this.prevMonth() + '&anio=' + this.prevYear()"
@@ -21,7 +21,6 @@
         </div>
 
         <View>
-            <ViewItem title="Nombre">{{ card.name }}</ViewItem>
             <ViewItem title="Marca">{{ brand.name }}</ViewItem>
             <ViewItem title="Banco">{{ bank.name }}</ViewItem>
             <ViewItem title="Totales">
