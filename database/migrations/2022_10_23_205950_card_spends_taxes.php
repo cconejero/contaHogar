@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('card_spends', function (Blueprint $table) {
-            $table->enum('tax', ['impuesto_sello'])->nullable()->default(null);
+            $table->enum('tax', ['impuesto_sello', 'impuesto_pais'])->nullable()->default(null);
         });
     }
 

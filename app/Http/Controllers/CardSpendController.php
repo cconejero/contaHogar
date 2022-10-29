@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateCardSpendRequest;
 use App\Models\Card;
+use App\Models\CardBillingCycle;
 use App\Models\CardSpend;
 use App\Models\Currency;
 use Illuminate\Contracts\Foundation\Application;
@@ -30,69 +31,17 @@ class CardSpendController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function create(Card $card)
+    public function create(CardBillingCycle $cardBillingCycle)
     {
         return Inertia::render('Cards/Spends/Create', [
-            'card' => $card->only(
+            'card' => $cardBillingCycle->card->only(
                 'id', 'name'
             ),
-            'currencies' => Currency::all(['id', 'name', 'sign']),
-            'month' => Request::input('mes') ? Request::input('mes') : now()->month,
-            'year' => Request::input('anio') ? Request::input('anio') : now()->year
+            'cardBillingCycle' => $cardBillingCycle->only(
+                'id', 'year', 'month'
+            ),
+            'currencies' => Currency::all(['id', 'name', 'sign'])
         ]);
-    }
-
-    public function import(Card $card)
-    {
-        $attributes = Request::validate([
-            'actualMonth' => 'required',
-            'actualYear' => 'required',
-            'prevMonth' => 'required',
-            'prevYear' => 'required',
-        ]);
-
-        $attributes['card_id'] = $card->id;
-
-        if ($card->user->id === Auth::user()->id){
-            $prevSpends = CardSpend::query()
-                ->where([
-                    ['year', '=', $attributes['prevYear']],
-                    ['month', '=', $attributes['prevMonth']],
-                    ['card_id', '=', $attributes['card_id']]
-                ])
-                ->where(function ($query) {
-                    $query->whereColumn('actual_due', '<', 'total_due')
-                        ->orWhere('fixed', true);
-                })
-                ->get();
-
-            foreach ($prevSpends as $spend){
-
-                $actual_due = $spend->actual_due;
-
-                if ((!$spend->fixed) && ($spend->actual_due < $spend->total_due)){
-                    $actual_due ++;
-                }
-
-                $cardSpend = CardSpend::firstOrCreate([
-                    'year' => $attributes['actualYear'],
-                    'month' => $attributes['actualMonth'],
-                    'card_id' => $card->id,
-                    'description' => $spend->description,
-                    'amount' => $spend->amount,
-                    'currency_id' => $spend->currency_id,
-                    'fixed' => $spend->fixed,
-                    'actual_due' => $actual_due,
-                    'total_due' => $spend->total_due
-                ]);
-            }
-        }
-
-
-        $month = $attributes['actualMonth'];
-        $year = $attributes['actualYear'];
-
-        return redirect('/cards/' . $card->id . '?mes=' . $month . '&anio=' . $year);
     }
 
     /**
@@ -101,7 +50,7 @@ class CardSpendController extends Controller
      * @param Card $card
      * @return Application|RedirectResponse|Redirector
      */
-    public function store(Card $card)
+    public function store(CardBillingCycle $cardBillingCycle)
     {
         $attributes = Request::validate([
             'description' => 'required',
@@ -110,18 +59,13 @@ class CardSpendController extends Controller
             'fixed' => ['required'],
             'actual_due' => ['required', 'numeric'],
             'total_due' => ['required', 'numeric'],
-            'month' => ['required', 'numeric', 'between:1,12'],
-            'year' => ['required', 'numeric', 'between:2020,2025'],
         ]);
 
-        $attributes['card_id'] = $card->id;
+        $attributes['card_billing_cycle_id'] = $cardBillingCycle->id;
 
         CardSpend::create($attributes);
 
-        $month = $attributes['month'];
-        $year = $attributes['year'];
-
-        return redirect('/cards/' . $card->id . '?mes=' . $month . '&year=' . $year);
+        return redirect('/billing_cycle/' . $cardBillingCycle->id);
     }
 
     /**

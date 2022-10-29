@@ -20,6 +20,12 @@ export default {
         username() {
             return this.$page.props.auth.user.username;
         },
+        avatar(){
+            return this.$page.props.auth.user.avatar;
+        },
+        email(){
+            return this.$page.props.auth.user.email
+        }
     },
 };
 </script>

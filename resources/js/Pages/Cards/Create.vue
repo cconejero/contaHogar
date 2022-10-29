@@ -49,6 +49,47 @@
         </div>
 
         <div class="mb-6">
+            <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                   for="generation_day_name"
+            >
+                Día de cierre
+            </label>
+
+            <Radio :items="days" v-model="form.generation_day_name">Día de cierre</Radio>
+
+            <div v-if="form.errors.generation_day_name" v-text="form.errors.generation_day_name" class="text-red-500 text-xs mt-1"></div>
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                   for="generation_day_number"
+            >
+                Numero de día cierre
+            </label>
+
+            <input v-model="form.generation_day_number"
+                   class="border rounded-xl border-gray-400 p-2 w-full"
+                   type="number"
+                   name="generation_day_number"
+                   id="generation_day_number"
+                   required
+            >
+            <div v-if="form.errors.generation_day_number" v-text="form.errors.generation_day_number" class="text-red-500 text-xs mt-1"></div>
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                   for="due_day_name"
+            >
+                Día de vencimiento
+            </label>
+
+            <Radio :items="days" v-model="form.due_day_name">Día de vencimiento</Radio>
+
+            <div v-if="form.errors.due_day_name" v-text="form.errors.due_day_name" class="text-red-500 text-xs mt-1"></div>
+        </div>
+
+        <div class="mb-6">
             <button type="submit"
                     class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
                     :disabled="form.processing"
@@ -67,10 +108,22 @@ import {useForm} from "@inertiajs/inertia-vue3"
 import Radio from "../../Shared/Radio"
 import Layout from "../../Shared/Layout";
 
+
+const days = [
+    { id: 'Monday', name: 'Lunes' },
+    { id: 'Tuesday', name: 'Martes' },
+    { id: 'Wednesday', name: 'Miercoles' },
+    { id: 'Thursday', name: 'Jueves' },
+    { id: 'Friday', name: 'Viernes' },
+];
+
 let form = useForm({
     name: '',
     bank_id: 1,
     card_brand_id: 1,
+    generation_day_name: 'Monday',
+    generation_day_number: 1,
+    due_day_name: 'Monday'
 });
 
 let props = defineProps({

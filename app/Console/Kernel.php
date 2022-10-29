@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Models\Exchange;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Http;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +18,22 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // Actualizar el valor del dolar
+        $schedule->call(function () {
+            $response = Http::withToken(env('API_BCRA'))
+                ->get('https://api.estadisticasbcra.com/usd_of_minorista')
+                ->json();
+
+            $today = $response[count($response) - 1];
+
+            Exchange::create([
+                'currency_id' => 2,
+                'date' => $today['d'],
+                'value' => $today["v"]
+            ]);
+        })->dailyAt('15:00');
+
     }
 
     /**

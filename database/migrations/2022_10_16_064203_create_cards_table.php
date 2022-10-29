@@ -19,6 +19,13 @@ return new class extends Migration
             $table->foreignId('bank_id');
             $table->foreignId('card_brand_id');
             $table->foreignId('user_id');
+            $table->enum('generation_day_name', [
+                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+            ])->default('Thursday');
+            $table->integer('generation_day_number')->default(19);
+            $table->enum('due_day_name', [
+                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+            ])->default('Monday');
             $table->timestamps();
         });
     }

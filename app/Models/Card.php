@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -19,9 +20,9 @@ class Card extends Model
         return $this->belongsTo(Bank::class);
     }
 
-    public function spends()
+    public function billingCycles()
     {
-        return $this->hasMany(CardSpend::class, 'card_id', 'id');
+        return $this->hasMany(CardBillingCycle::class);
     }
 
     public function brand(){
@@ -33,43 +34,31 @@ class Card extends Model
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * @param Card $card
-     * @param Integer $month
-     * @param Integer $year
-     * @return mixed
-     */
-    public static function calculateImpuestoSellos(Card $card, int $month, int $year){
-        $spends = CardSpend::query()
-            ->where('card_id', $card->id)
-            ->where('month', $month)
-            ->where('year', $year)
-            ->whereNull('tax')
-            ->get();
+    public function getGenerationDate(Carbon $date){
+        $generationDate = Carbon::create($date->year, $date->month, $this->generation_day_number);
+        $generationDate->next($this->generation_day_name);
+        return $generationDate;
+    }
 
-        $groups = $spends->groupBy('currency_id');
+    public function getDueDate(Carbon $date){
+        $dueDate = Carbon::create($date->year, $date->month, $date->day)->addWeek();
+        $dueDate->next($this->due_day_name);
+        return $dueDate;
+    }
 
-        $groupsWithSum = $groups->mapWithKeys(function ($group, $key){
-            return [
-                $key => round(($group->sum('amount') * 0.006), 2)
-            ];
-        });
+    public function actualBillingCycle()
+    {
+        $date = Carbon::now();
 
-        foreach ($groupsWithSum as $key => $value){
-            CardSpend::updateOrCreate(
-                [
-                    'description' => 'Impuesto Sello ' . Currency::find($key)->name,
-                    'month' => $month,
-                    'year' => $year,
-                    'card_id' => $card->id,
-                    'actual_due' => 1,
-                    'total_due' => 1,
-                    'currency_id' => $key,
-                    'tax' => 'impuesto_sello'
-                ], [
-                    'amount' => $value
-                ]
-            );
-        }
+        $billingCycle = CardBillingCycle::firstOrCreate([
+            'card_id' => $this->id,
+            'month' => $date->month,
+            'year' => $date->year
+        ], [
+            'generation_date' => $this->getGenerationDate($date),
+            'due_date' => $this->getDueDate($date)
+        ]);
+
+        return $billingCycle;
     }
 }

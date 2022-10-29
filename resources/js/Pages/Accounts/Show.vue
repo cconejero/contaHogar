@@ -60,7 +60,7 @@
                     {{ accountSpend.description }}
                 </TableItem>
                 <TableItem>
-                    <span :class="(accountSpend.movement_id === 2) ? 'text-red-500' : 'text-green-700'">{{ currency.sign }} {{ accountSpend.amount }}</span>
+                    <span :class="(accountSpend.movement_id === 2) ? 'text-red-500' : 'text-green-700'">{{ currency.sign }} {{ accountSpend.movement_id === 2 ? '-' : '' }}{{ accountSpend.amount }}</span>
                 </TableItem>
             </tr>
         </Table>

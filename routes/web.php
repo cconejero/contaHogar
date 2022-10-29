@@ -3,15 +3,38 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountSpendController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CardBillingCycleController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CardSpendController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
 Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
+
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/auth/callback', function () {
+    $googleUser = Socialite::driver('google')->stateless()->user();
+
+    $user = User::firstOrCreate([
+        'email' => $googleUser->email,
+    ],[
+        'name' => $googleUser->name,
+        'avatar' => $googleUser->avatar
+    ]);
+
+    Auth::login($user);
+
+    return redirect('/');
+});
 
 Route::middleware('auth')->group(function () {
 
@@ -30,7 +53,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/cards', [CardController::class, 'index']);
     Route::get('/cards/create', [CardController::class, 'create']);
     Route::post('/cards', [CardController::class, 'store']);
-    Route::get('/cards/{card}', [CardController::class, 'show']);
+
+    Route::get('/billing_cycle/{card_billing_cycle}', [CardBillingCycleController::class, 'show']);
+    Route::post('/billing_cycle/{card_billing_cycle}/import', [CardBillingCycleController::class, 'import']);
+
+    Route::get('/card_spends/{card_billing_cycle}/create', [CardSpendController::class, 'create']);
+    Route::post('/card_spends/{card_billing_cycle}', [CardSpendController::class, 'store']);
 
     Route::get('/accounts', [AccountController::class, 'index']);
     Route::get('/accounts/create', [AccountController::class, 'create']);
@@ -39,9 +67,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/accounts/{account}/spends/create', [AccountSpendController::class, 'create']);
     Route::post('/accounts/{account}/spends', [AccountSpendController::class, 'store']);
-
-    Route::get('/cards/{card}/spends/create', [CardSpendController::class, 'create']);
-    Route::post('/cards/{card}/spends', [CardSpendController::class, 'store']);
-    Route::post('/cards/{card}/import', [CardSpendController::class, 'import']);
 
 });

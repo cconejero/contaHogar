@@ -15,7 +15,7 @@
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
                         <button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span class="sr-only">View notifications</span>
+                            <span class="sr-only">Ver Notificaciones</span>
                             <BellIcon class="h-6 w-6" aria-hidden="true" />
                         </button>
 
@@ -23,8 +23,8 @@
                         <Menu as="div" class="relative ml-3">
                             <div>
                                 <MenuButton class="flex max-w-xs items-center">
-                                    <span class="text-white text-sm hover:text-gray-400">{{ username }}</span>
-                                    <!--                                            <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />-->
+                                    <span class="sr-only">Menu de Usuario</span>
+                                    <img class="h-8 w-8 rounded-full" :src="avatar" alt="" />
                                 </MenuButton>
                             </div>
                             <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
@@ -41,7 +41,7 @@
                 <div class="-mr-2 flex md:hidden">
                     <!-- Mobile menu button -->
                     <DisclosureButton class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span class="sr-only">Open main menu</span>
+                        <span class="sr-only">Menu principal</span>
                         <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
                         <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
                     </DisclosureButton>
@@ -55,8 +55,15 @@
             </div>
             <div class="border-t border-gray-700 pt-4 pb-3">
                 <div class="flex items-center px-5">
+                    <div class="flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full" :src="avatar" alt="" />
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-base font-medium leading-none text-white">{{ username }}</div>
+                        <div class="text-sm font-medium leading-none text-gray-400">{{ email }}</div>
+                    </div>
                     <button type="button" class="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span class="sr-only">View notifications</span>
+                        <span class="sr-only">Notificaciones</span>
                         <BellIcon class="h-6 w-6" aria-hidden="true" />
                     </button>
                 </div>
@@ -102,6 +109,12 @@ export default {
     computed: {
         username(){
             return this.$page.props.auth.user.username;
+        },
+        avatar(){
+            return this.$page.props.auth.user.avatar;
+        },
+        email(){
+            return this.$page.props.auth.user.email
         }
     }
 };

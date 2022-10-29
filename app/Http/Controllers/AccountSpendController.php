@@ -55,7 +55,7 @@ class AccountSpendController extends Controller
 
         AccountSpend::create($attributes);
 
-        return redirect('/accounts/' . $account->id);
+        return redirect('/accounts/' . $account->id . '?mes=' . $attributes['month'] . '&anio' . $attributes['year']);
     }
 
     /**

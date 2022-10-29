@@ -15,15 +15,13 @@ return new class extends Migration
     {
         Schema::create('card_spends', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('card_id')->cascadeOnDelete();
+            $table->foreignId('card_billing_cycle_id')->cascadeOnDelete();
             $table->string('description');
             $table->decimal('amount', 8, 2);
             $table->foreignId('currency_id');
             $table->boolean('fixed')->default(false);
             $table->unsignedSmallInteger('actual_due');
             $table->unsignedSmallInteger('total_due');
-            $table->unsignedSmallInteger('month');
-            $table->unsignedSmallInteger('year');
             $table->timestamps();
         });
     }

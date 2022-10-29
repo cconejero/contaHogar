@@ -7,13 +7,13 @@
                 <h1 class="text-3xl">{{ card.name }}</h1>
 
                 <Link
-                    :href="'/cards/' + card.id + '?mes=' + this.prevMonth() + '&anio=' + this.prevYear()"
+                    :href="'/billing_cycle/' + prevBillingCycle.id"
                     class="text-sm ml-4"
                     >&laquo;</Link
                 >
-                <span class="text-sm ml-2">Período {{ month }}/{{ year }}</span>
+                <span class="text-sm ml-2">Período {{ billingCycle.month }}/{{ billingCycle.year }}</span>
                 <Link
-                    :href="'/cards/' + card.id + '?mes=' + this.nextMonth() + '&anio=' + this.nextYear()"
+                    :href="'/billing_cycle/' + nextBillingCycle.id"
                     class="text-sm ml-2"
                     >&raquo;</Link
                 >
@@ -21,21 +21,14 @@
         </div>
 
         <View>
-            <ViewItem title="Marca">{{ brand.name }}</ViewItem>
             <ViewItem title="Banco">{{ bank.name }}</ViewItem>
+            <ViewItem title="Emisor">{{ brand.name }}</ViewItem>
+            <ViewItem title="Fecha de cierre">{{ billingCycle.generation_date }}</ViewItem>
+            <ViewItem title="Fecha de vencimiento">{{ billingCycle.due_date }}</ViewItem>
             <ViewItem title="Totales">
                 <div v-for="item in total">
                     {{ item.currency }} {{ item.amount.toLocaleString('es-AR', {style: 'decimal', minimumFractionDigits: 2}) }}
                 </div>
-            </ViewItem>
-            <ViewItem title="Importar">
-                <Link
-                    class="text-blue-500"
-                    :href="'/cards/' + card.id + '/import?prevMonth=' + this.prevMonth() + '&prevYear=' + this.prevYear() + '&actualMonth=' + month + '&actualYear=' + year"
-                    method="post"
-                >
-                    Importar gasto del período anterior.
-                </Link>
             </ViewItem>
         </View>
 
@@ -43,7 +36,7 @@
             <div class="flex items-center">
                 <h1 class="text-3xl">Gastos</h1>
 
-                <Link :href="'/cards/' + card.id + '/spends/create?mes=' + month + '&anio=' + year"
+                <Link :href="'/card_spends/' + props.billingCycle.id + '/create'"
                       class="text-blue-500 text-sm ml-3">Nuevo Gasto
                 </Link
                 >
@@ -58,6 +51,7 @@
                 <ViewDetailItem>{{ cardSpend.sign }} {{ cardSpend.amount }}</ViewDetailItem>
                 <ViewDetailItem>
                     <span v-if="cardSpend.fixed">Gasto Fijo</span>
+                    <span v-else-if="cardSpend.tax">Impuesto</span>
                     <span v-else>Cuota: {{ cardSpend.actual_due }} de {{ cardSpend.total_due }}</span>
                 </ViewDetailItem>
             </tr>
@@ -77,13 +71,16 @@ import ViewItem from "../../Shared/ViewItem";
 import ViewDetail from "../../Shared/ViewDetail";
 import ViewDetailItem from "../../Shared/ViewDetailItem";
 
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
 let props = defineProps({
     card: Object,
     bank: Object,
     brand: Object,
     spends: Object,
-    month: Number,
-    year: Number,
+    billingCycle: Object,
+    nextBillingCycle: Object,
+    prevBillingCycle: Object,
     filters: Object,
 });
 

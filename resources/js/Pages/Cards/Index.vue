@@ -40,7 +40,7 @@
                                             class="text-sm font-medium text-gray-900 flex items-center"
                                         >
                                             <Link v-if="card.can.view"
-                                                  :href="`/cards/${card.id}`"
+                                                  :href="`/billing_cycle/${card.actualBillingCycleId}`"
                                                   class="text-indigo-600 hover:text-indigo-900"
                                                   >{{ card.name }}</Link>
                                         </div>
@@ -58,18 +58,6 @@
                                 class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                             >
                                 <div>{{ card.bankName }}</div>
-                            </td>
-
-                            <td
-                                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
-                            >
-                                <Link
-                                    v-if="card.can.edit"
-                                    :href="`/cards/${card.id}/edit`"
-                                    class="text-indigo-600 hover:text-indigo-900"
-                                >
-                                    Editar
-                                </Link>
                             </td>
                         </tr>
                         </tbody>

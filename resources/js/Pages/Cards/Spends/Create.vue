@@ -3,7 +3,7 @@
     <head title="Crear Gasto en Tarjeta"/>
 
     <h1 class="text-3xl">Crear Gasto en {{ card.name }}</h1>
-    <h2 class="text-sm">Período {{ month }}/{{ year }}</h2>
+    <h2 class="text-sm">Período {{ cardBillingCycle.month }}/{{ cardBillingCycle.year }}</h2>
 
     <form @submit.prevent="submit" class="mt-8 max-w-md mx-auto">
 
@@ -134,8 +134,7 @@ const enabled = ref(false);
 let props = defineProps({
     card: Object,
     currencies: Object,
-    month: Number,
-    year: Number
+    cardBillingCycle: Object
 });
 
 let form = useForm({
@@ -145,8 +144,6 @@ let form = useForm({
     fixed: enabled,
     actual_due: 1,
     total_due: 1,
-    year: props.year,
-    month: props.month,
 });
 
 let fixedHandler = () => {
@@ -155,7 +152,7 @@ let fixedHandler = () => {
 };
 
 let submit = () => {
-    form.post('/cards/' + props.card.id + '/spends');
+    form.post('/card_spends/' + props.cardBillingCycle.id );
 };
 
 </script>

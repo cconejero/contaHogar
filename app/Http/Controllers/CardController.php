@@ -9,6 +9,7 @@ use App\Models\Card;
 use App\Models\CardBrand;
 use App\Models\CardSpend;
 use Carbon\Traits\Date;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -36,6 +37,7 @@ class CardController extends Controller
                     'name' => $card->name,
                     'bankName' => $card->bank->name,
                     'brand' => $card->brand->name,
+                    'actualBillingCycleId' => $card->actualBillingCycle()->id,
                     'can' => [
                         'edit' => Auth::user()->can('update', $card),
                         'view' => Auth::user()->can('view', $card)
@@ -57,7 +59,14 @@ class CardController extends Controller
     {
         return Inertia::render('Cards/Create', [
             'banks' => Bank::all(['id', 'name']),
-            'brands' => CardBrand::all(['id', 'name'])
+            'brands' => CardBrand::all(['id', 'name']),
+            'dayNames' => [
+                'Monday' => 'Lunes',
+                'Tuesday' => 'Martes',
+                'Wednesday' => 'Miercoles',
+                'Thursday' => 'Jueves',
+                'Friday' => 'Viernes'
+            ]
         ]);
     }
 
@@ -70,9 +79,10 @@ class CardController extends Controller
     public function store(StoreCardRequest $request)
     {
         $attributes = Request::validate([
-            'name' => 'required',
+            'name' => ['required', 'max:255'],
             'bank_id' => 'required',
-            'card_brand_id' => 'required'
+            'card_brand_id' => 'required',
+            'generation_day_number' => 'between:1,28'
         ]);
 
         $attributes['user_id'] = Auth::user()->id;
@@ -101,50 +111,7 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
-        if (Auth::user()->can('view', $card)){
-            $month = Request::input('mes') ? Request::input('mes') : now()->month;
-            $year = Request::input('anio') ? Request::input('anio') : now()->year;
 
-            Card::calculateImpuestoSellos($card, $month, $year);
-
-            return Inertia::render('Cards/Show', [
-                'card' => $card->only(
-                    'id', 'name'
-                ),
-                'brand' => $card->brand->only(
-                    'name'
-                ),
-                'bank' => $card->bank->only(
-                    'name'
-                ),
-                'spends' => CardSpend::query()
-                    ->where('card_id', $card->id)
-                    ->where('month', $month)
-                    ->where('year', $year)
-                    ->when(Request::input('anio'), function ($query, $year) {
-                        $query->where('year', $year);
-                    })
-                    ->when(Request::input('mes'), function ($query, $month) {
-                        $query->where('month', $month);
-                    })
-                    ->paginate(10)
-                    ->withQueryString()
-                    ->through(fn($spend) => [
-                        'description' => $spend->description,
-                        'amount' => $spend->amount,
-                        'actual_due' => $spend->actual_due,
-                        'total_due' => $spend->total_due,
-                        'fixed' => $spend->fixed,
-                        'sign' => $spend->currency->sign,
-                        'currency_name' => $spend->currency->name
-                    ]
-                ),
-                'month' => $month,
-                'year' => $year,
-            ]);
-        } else {
-            return abort(403);
-        }
     }
 
     /**
