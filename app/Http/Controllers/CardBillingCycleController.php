@@ -89,6 +89,7 @@ class CardBillingCycleController extends Controller
                         'actual_due' => $spend->actual_due,
                         'total_due' => $spend->total_due,
                         'fixed' => $spend->fixed,
+                        'tag' => $spend->tag->name,
                         'sign' => $spend->currency->sign,
                         'currency_name' => $spend->currency->name,
                         'tax' => $spend->tax

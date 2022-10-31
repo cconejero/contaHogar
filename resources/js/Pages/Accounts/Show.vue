@@ -46,16 +46,21 @@
 
         </div>
 
-        <Table>
-            <tr v-for="accountSpend in spends.data" :key="accountSpend.id">
-                <TableItem>
-                    {{ accountSpend.description }}
-                </TableItem>
-                <TableItem>
+        <ViewDetail>
+            <tr v-for="accountSpend in spends.data"
+                :key="accountSpend.id"
+            >
+                <ViewDetailItem>{{ accountSpend.description }}</ViewDetailItem>
+                <ViewDetailItem>
                     <span :class="(accountSpend.movement_id === 2) ? 'text-red-500' : 'text-green-700'">{{ currency.sign }} {{ accountSpend.amount }}</span>
-                </TableItem>
+                </ViewDetailItem>
+                <ViewDetailItem>
+                    <span class="bg-blue-300 rounded-full px-3 py-1">
+                        {{ accountSpend.tag }}
+                    </span>
+                </ViewDetailItem>
             </tr>
-        </Table>
+        </ViewDetail>
 
         <Pagination :links="spends.links" class="mt-6" />
     </Layout>
@@ -69,6 +74,8 @@ import TableItem from "../../Shared/TableItem";
 import View from "../../Shared/View";
 import ViewItem from "../../Shared/ViewItem";
 import _ from "lodash";
+import ViewDetail from "../../Shared/ViewDetail";
+import ViewDetailItem from "../../Shared/ViewDetailItem";
 
 let props = defineProps({
     account: Object,

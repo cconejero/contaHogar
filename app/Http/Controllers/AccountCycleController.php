@@ -85,6 +85,7 @@ class AccountCycleController extends Controller
                         'description' => $spend->description,
                         'amount' => ($spend->movement_id === 2) ? (-1 * $spend->amount) : $spend->amount,
                         'movement_id' => $spend->movement_id,
+                        'tag' => $spend->tag->name,
                     ])
             ]);
         } else {

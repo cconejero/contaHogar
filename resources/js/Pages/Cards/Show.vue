@@ -49,6 +49,11 @@
                 <ViewDetailItem>{{ cardSpend.description }}</ViewDetailItem>
                 <ViewDetailItem>{{ cardSpend.sign }} {{ cardSpend.amount }}</ViewDetailItem>
                 <ViewDetailItem>
+                    <span class="bg-blue-300 rounded-full px-3 py-1">
+                        {{ cardSpend.tag }}
+                    </span>
+                </ViewDetailItem>
+                <ViewDetailItem>
                     <span v-if="cardSpend.fixed">Gasto Fijo</span>
                     <span v-else-if="cardSpend.tax">Impuesto</span>
                     <span v-else>Cuota: {{ cardSpend.actual_due }} de {{ cardSpend.total_due }}</span>

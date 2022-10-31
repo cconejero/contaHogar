@@ -9,7 +9,7 @@ use Ramsey\Uuid\Type\Integer;
 class CardSpend extends Model
 {
     use HasFactory;
-    protected $with = ['currency', 'card'];
+    protected $with = ['currency', 'card', 'tag'];
 
     public function currency()
     {
@@ -19,5 +19,10 @@ class CardSpend extends Model
     public function card()
     {
         return $this->belongsTo(Card::class);
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
     }
 }
