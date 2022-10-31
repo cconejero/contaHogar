@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,5 +35,19 @@ class Account extends Model
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+
+    public function actualBillingCycle()
+    {
+        $date = Carbon::now();
+
+        $accountCycle = AccountCycle::firstOrCreate([
+            'account_id' => $this->id,
+            'month' => $date->month,
+            'year' => $date->year
+        ]);
+
+        return $accountCycle;
     }
 }

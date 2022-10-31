@@ -45,45 +45,13 @@
                 <input v-model="form.amount"
                        class="border rounded-xl border-gray-400 p-2 w-full"
                        type="number"
+                       step="0.01"
+                       min="0"
                        name="amount"
                        id="amount"
                        required
                 >
                 <div v-if="form.errors.amount" v-text="form.errors.amount" class="text-red-500 text-xs mt-1"></div>
-            </div>
-
-            <div class="mb-6">
-                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                       for="month"
-                >
-                    Período mes
-                </label>
-
-                <input v-model="form.month"
-                       class="border rounded-xl border-gray-400 p-2 w-full"
-                       type="number"
-                       name="month"
-                       id="month"
-
-                >
-                <div v-if="form.errors.month" v-text="form.errors.month" class="text-red-500 text-xs mt-1"></div>
-            </div>
-
-            <div class="mb-6">
-                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                       for="year"
-                >
-                    Período año
-                </label>
-
-                <input v-model="form.year"
-                       class="border rounded-xl border-gray-400 p-2 w-full"
-                       type="number"
-                       name="year"
-                       id="year"
-
-                >
-                <div v-if="form.errors.year" v-text="form.errors.year" class="text-red-500 text-xs mt-1"></div>
             </div>
 
             <div class="mb-6">
@@ -108,19 +76,18 @@ import Radio from "../../../Shared/Radio";
 let form = useForm({
     movement_id: 2,
     description: '',
-    amount: 0,
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
+    amount: 0
 });
 
 let props = defineProps({
     account: Object,
+    accountCycle: Object,
     movements: Object
 });
 
 
 let submit = () => {
-    form.post('/accounts/' + props.account.id + '/spends');
+    form.post('/account_spends/' + props.accountCycle.id);
 };
 
 </script>

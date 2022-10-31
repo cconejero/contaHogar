@@ -38,8 +38,7 @@
 
                 <Link :href="'/card_spends/' + props.billingCycle.id + '/create'"
                       class="text-blue-500 text-sm ml-3">Nuevo Gasto
-                </Link
-                >
+                </Link>
             </div>
         </div>
 
@@ -96,43 +95,4 @@ let total = _(props.spends.data)
     })
     .value();
 
-let nextMonth = () => {
-    if (props.month < 12) {
-        let next = props.month;
-        next++;
-        return next;
-    } else {
-        return 1;
-    }
-};
-
-let prevMonth = () => {
-    if (props.month > 1) {
-        let prev = props.month;
-        prev--;
-        return prev;
-    } else {
-        return 12;
-    }
-};
-
-let nextYear = () => {
-    if (props.month < 12) {
-        return props.year;
-    } else {
-        let next = props.year;
-        next++;
-        return next;
-    }
-};
-
-let prevYear = () => {
-    if (props.month > 1) {
-        return props.year;
-    } else {
-        let prev = props.year;
-        prev--;
-        return prev;
-    }
-};
 </script>

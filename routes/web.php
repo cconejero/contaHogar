@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountCycleController;
 use App\Http\Controllers\AccountSpendController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CardBillingCycleController;
@@ -13,9 +14,8 @@ use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 
 Route::get('login', [LoginController::class, 'create'])->name('login');
-Route::post('login', [LoginController::class, 'store']);
+//Route::post('login', [LoginController::class, 'store']);
 Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
-
 
 Route::get('/auth/redirect', function () {
     return Socialite::driver('google')->redirect();
@@ -42,9 +42,9 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Home');
     });
 
-    Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/create', [UserController::class, 'create'])->middleware('can:create,\App\Models\User');
-    Route::post('/users', [UserController::class, 'store']);
+//    Route::get('/users', [UserController::class, 'index']);
+//    Route::get('/users/create', [UserController::class, 'create'])->middleware('can:create,\App\Models\User');
+//    Route::post('/users', [UserController::class, 'store']);
 
     Route::get('/settings', function () {
         return Inertia::render('Settings');
@@ -63,9 +63,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/accounts', [AccountController::class, 'index']);
     Route::get('/accounts/create', [AccountController::class, 'create']);
     Route::post('/accounts', [AccountController::class, 'store']);
-    Route::get('/accounts/{account}', [AccountController::class, 'show']);
 
-    Route::get('/accounts/{account}/spends/create', [AccountSpendController::class, 'create']);
-    Route::post('/accounts/{account}/spends', [AccountSpendController::class, 'store']);
+    Route::get('/account_cycle/{account_cycle}', [AccountCycleController::class, 'show']);
+
+    Route::get('/account_spends/{account_cycle}/create', [AccountSpendController::class, 'create']);
+    Route::post('/account_spends/{account_cycle}', [AccountSpendController::class, 'store']);
 
 });

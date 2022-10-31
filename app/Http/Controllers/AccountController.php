@@ -24,6 +24,7 @@ class AccountController extends Controller
     {
         return Inertia::render('Accounts/Index', [
             'accounts' => Account::query()
+                ->whereUserId(Auth::user()->id)
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('description', 'like', '%' . $search . '%');
                 })
@@ -34,8 +35,10 @@ class AccountController extends Controller
                     'description' => $account->description,
                     'alias' => $account->alias,
                     'cbu' => $account->cbu,
+                    'actualCycleId' => $account->actualBillingCycle()->id,
                     'can' => [
-                        'edit' => Auth::user()->can('edit', $account)
+                        'edit' => Auth::user()->can('edit', $account),
+                        'view' => Auth::user()->can('view', $account)
                     ]
                 ]),
             'filters' => Request::only(['search']),
@@ -91,42 +94,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        if (Auth::user()->can('view', $account)){
-            return Inertia::render('Accounts/Show', [
-                'account' => $account->only(
-                    'id', 'description', 'alias', 'cbu'
-                ),
-                'bank' => $account->bank->only(
-                    'name'
-                ),
-                'currency' => $account->currency->only(
-                    'name', 'sign'
-                ),
-                'accountType' => $account->accountType->only(
-                    'name'
-                ),
-                'spends' => AccountSpend::query()
-                    ->where('account_id', $account->id)
-                    ->when(Request::input('anio'), function ($query, $year) {
-                        $query->where('year', $year);
-                    })
-                    ->when(Request::input('mes'), function ($query, $month) {
-                        $query->where('month', $month);
-                    })
-                    ->paginate(10)
-                    ->withQueryString()
-                    ->through(fn($spend) => [
-                        'description' => $spend->description,
-                        'amount' => $spend->amount,
-                        'movement_id' => $spend->movement_id,
-                    ]
-                    ),
-                'month' => Request::input('mes') ? Request::input('mes') : now()->month,
-                'year' => Request::input('anio') ? Request::input('anio') : now()->year,
-            ]);
-        } else {
-            return abort(403);
-        }
+
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountSpendRequest;
 use App\Http\Requests\UpdateAccountSpendRequest;
 use App\Models\Account;
+use App\Models\AccountCycle;
 use App\Models\AccountSpend;
 use App\Models\Movement;
 use Inertia\Inertia;
@@ -27,10 +28,13 @@ class AccountSpendController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function create(Account $account)
+    public function create(AccountCycle $accountCycle)
     {
         return Inertia::render('Accounts/Spends/Create', [
-            'account' => $account->only('id', 'description'),
+            'account' => $accountCycle->account->only('id', 'description'),
+            'accountCycle' => $accountCycle->only(
+                'id', 'year', 'month'
+            ),
             'movements' => Movement::all(['id', 'name'])
         ]);
     }
@@ -41,21 +45,19 @@ class AccountSpendController extends Controller
      * @param  \App\Http\Requests\StoreAccountSpendRequest  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Account $account)
+    public function store(AccountCycle $accountCycle)
     {
         $attributes = Request::validate([
             'description' => 'required',
             'amount' => ['required', 'numeric'],
             'movement_id' => ['required'],
-            'month' => ['required', 'numeric', 'between:1,12'],
-            'year' => ['required', 'numeric', 'between:2020,2025'],
         ]);
 
-        $attributes['account_id'] = $account->id;
+        $attributes['account_cycle_id'] = $accountCycle->id;
 
         AccountSpend::create($attributes);
 
-        return redirect('/accounts/' . $account->id . '?mes=' . $attributes['month'] . '&anio' . $attributes['year']);
+        return redirect('/account_cycle/' . $accountCycle->id);
     }
 
     /**

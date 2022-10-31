@@ -25,7 +25,10 @@
         <Table>
             <tr v-for="account in accounts.data" :key="account.id">
                 <TableItem>
-                    <Link :href="'/accounts/' + account.id">
+                    <Link v-if="account.can.view"
+                          :href="`/account_cycle/${account.actualCycleId}`"
+                          class="text-indigo-600 hover:text-indigo-900"
+                    >
                         {{ account.description }}
                     </Link>
                 </TableItem>

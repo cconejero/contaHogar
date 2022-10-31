@@ -93,11 +93,11 @@ const navigation = [
     { name: 'Inicio', href: '/', current: (usePage().component.value === "Home")},
     { name: 'Tarjetas', href: '/cards', current: (usePage().component.value === "Cards/Index") },
     { name: 'Cuentas', href: '/accounts', current: (usePage().component.value === "Accounts/Index") },
+    { name: 'Gastos Fijos', href: '/fixed_spenses', current: (usePage().component.value === "FixedExpenses/Index") },
     { name: 'Efectivo', href: '#', current: (usePage().component.value === "Cash/Index") },
     { name: 'Reportes', href: '#', current: (usePage().component.value === "Reports/index") },
 ]
 const userNavigation = [
-    { name: 'Usuarios', href: '/users', method: "get" },
     { name: 'Configuración', href: '/settings', method: "get" },
     { name: 'Salir', href: '/logout', method: "post" },
 ]

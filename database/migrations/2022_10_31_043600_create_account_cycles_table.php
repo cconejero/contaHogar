@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('account_spends', function (Blueprint $table) {
+        Schema::create('account_cycles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('account_cycle_id')->cascadeOnDelete();
-            $table->string('description');
-            $table->decimal('amount', 8, 2);
-            $table->foreignId('movement_id');
+            $table->foreignId('account_id');
+            $table->integer('year');
+            $table->integer('month');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_spends');
+        Schema::dropIfExists('account_cycles');
     }
 };
