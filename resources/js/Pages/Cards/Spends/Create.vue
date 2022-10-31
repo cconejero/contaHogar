@@ -46,6 +46,8 @@
             <input v-model="form.amount"
                    class="border rounded-xl border-gray-400 p-2 w-full"
                    type="number"
+                   step="0.01"
+                   min="0"
                    name="amount"
                    id="amount"
                    required

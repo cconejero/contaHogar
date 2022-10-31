@@ -72,8 +72,8 @@ class AccountController extends Controller
     {
         $attributes = Request::validate([
             'description' => 'required',
-            'alias',
-            'cbu',
+            'alias' => 'nullable',
+            'cbu' => 'nullable',
             'bank_id' => 'required',
             'account_type_id' => 'required',
             'currency_id' => 'required'

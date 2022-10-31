@@ -48,7 +48,7 @@ class Card extends Model
 
     public function actualBillingCycle()
     {
-        $date = Carbon::now();
+        $date = Carbon::create(now()->year, now()->month, 1);
 
         $billingCycle = CardBillingCycle::firstOrCreate([
             'card_id' => $this->id,
