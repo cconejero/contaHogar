@@ -24,14 +24,14 @@ Route::get('/auth/redirect', function () {
 Route::get('/auth/callback', function () {
     $googleUser = Socialite::driver('google')->stateless()->user();
 
-    dd($googleUser);
-
     $user = User::firstOrCreate([
         'email' => $googleUser->email,
     ],[
         'name' => $googleUser->name,
         'avatar' => $googleUser->avatar
     ]);
+
+    dd($googleUser);
 
     Auth::login($user);
 
