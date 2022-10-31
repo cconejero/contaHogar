@@ -38,6 +38,24 @@
 
         <div class="mb-6">
             <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                   for="tag_id"
+            >
+                Tipo de gasto
+            </label>
+
+            <select v-model="form.tag_id"
+                    class="border rounded-xl border-gray-400 p-2 w-full bg-white">
+                <option v-for="tag in tags"
+                        :value="tag.id"
+                        :key="tag.id"
+                >{{ tag.name }}</option>
+            </select>
+
+            <div v-if="form.errors.tag_id" v-text="form.errors.tag_id" class="text-red-500 text-xs mt-1"></div>
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                    for="amount"
             >
                 Valor de Cuota
@@ -130,19 +148,22 @@ import Layout from "../../../Shared/Layout";
 import {Switch, SwitchGroup, SwitchLabel} from '@headlessui/vue'
 import {ref} from "vue";
 import Radio from "../../../Shared/Radio";
+import ListBox from "../../../Shared/ListBox";
 
 const enabled = ref(false);
 
 let props = defineProps({
     card: Object,
     currencies: Object,
-    cardBillingCycle: Object
+    cardBillingCycle: Object,
+    tags: Object,
 });
 
 let form = useForm({
     description: '',
     amount: 0,
     currency_id: 1,
+    tag_id: 1,
     fixed: enabled,
     actual_due: 1,
     total_due: 1,

@@ -4,7 +4,7 @@
 
         <div class="flex justify-between items-center mb-6">
             <div class="flex items-baseline">
-                <h1 class="text-3xl">{{ card.name }}</h1>
+                <h1 class="text-3xl ml-2">{{ card.name }}</h1>
 
                 <Link
                     :href="'/billing_cycle/' + prevBillingCycle.id"
@@ -14,7 +14,7 @@
                 <span class="text-sm ml-2">Período {{ billingCycle.month }}/{{ billingCycle.year }}</span>
                 <Link
                     :href="'/billing_cycle/' + nextBillingCycle.id"
-                    class="text-sm ml-2"
+                    class="text-sm ml-2 mr-2"
                     >&raquo;</Link
                 >
             </div>

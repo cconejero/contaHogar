@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\AccountCycle;
 use App\Models\AccountSpend;
 use App\Models\Movement;
+use App\Models\Tag;
 use Inertia\Inertia;
 use Request;
 
@@ -35,7 +36,8 @@ class AccountSpendController extends Controller
             'accountCycle' => $accountCycle->only(
                 'id', 'year', 'month'
             ),
-            'movements' => Movement::all(['id', 'name'])
+            'movements' => Movement::all(['id', 'name'])->sortBy('name')->values()->all(),
+            'tags' => Tag::query()->whereNull('user_id')->orderBy('name')->get(),
         ]);
     }
 
@@ -50,6 +52,7 @@ class AccountSpendController extends Controller
         $attributes = Request::validate([
             'description' => 'required',
             'amount' => ['required', 'numeric'],
+            'tag_id' => 'required',
             'movement_id' => ['required'],
         ]);
 

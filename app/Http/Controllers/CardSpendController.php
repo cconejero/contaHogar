@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\CardBillingCycle;
 use App\Models\CardSpend;
 use App\Models\Currency;
+use App\Models\Tag;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -40,7 +41,8 @@ class CardSpendController extends Controller
             'cardBillingCycle' => $cardBillingCycle->only(
                 'id', 'year', 'month'
             ),
-            'currencies' => Currency::all(['id', 'name', 'sign'])
+            'currencies' => Currency::all(['id', 'name', 'sign'])->sortBy(['name'])->values()->all(),
+            'tags' => Tag::query()->whereNull('user_id')->orderBy('name')->get(),
         ]);
     }
 
@@ -57,6 +59,7 @@ class CardSpendController extends Controller
             'amount' => ['required', 'numeric'],
             'currency_id' => ['required'],
             'fixed' => ['required'],
+            'tag_id' => 'required',
             'actual_due' => ['required', 'numeric'],
             'total_due' => ['required', 'numeric'],
         ]);

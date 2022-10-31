@@ -7,7 +7,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CardBillingCycleController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CardSpendController;
+use App\Http\Controllers\FixedExpenseController;
 use App\Http\Controllers\UserController;
+use App\Models\FixedExpense;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -68,5 +70,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/account_spends/{account_cycle}/create', [AccountSpendController::class, 'create']);
     Route::post('/account_spends/{account_cycle}', [AccountSpendController::class, 'store']);
+
+    Route::get('/fixed_expenses', [FixedExpenseController::class, 'index']);
+    Route::get('/fixed_expenses/create', [FixedExpenseController::class, 'create']);
+    Route::post('/fixed_expenses', [FixedExpenseController::class, 'store']);
 
 });

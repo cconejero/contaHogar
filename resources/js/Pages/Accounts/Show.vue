@@ -95,7 +95,7 @@ let total = _(props.spends.data)
         return {
             account_id: key,
             amount: _.sumBy(objs, function (o) {
-                return Number(o.amount);
+                return Number(o.movement_id === 2 ? (-1 * o.amount) : o.amount);
             }),
         };
     })

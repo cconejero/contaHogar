@@ -37,6 +37,24 @@
 
             <div class="mb-6">
                 <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
+                       for="tag_id"
+                >
+                    Tipo de gasto
+                </label>
+
+                <select v-model="form.tag_id"
+                        class="border rounded-xl border-gray-400 p-2 w-full bg-white">
+                    <option v-for="tag in tags"
+                            :value="tag.id"
+                            :key="tag.id"
+                    >{{ tag.name }}</option>
+                </select>
+
+                <div v-if="form.errors.tag_id" v-text="form.errors.tag_id" class="text-red-500 text-xs mt-1"></div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                        for="amount"
                 >
                     Monto
@@ -76,13 +94,15 @@ import Radio from "../../../Shared/Radio";
 let form = useForm({
     movement_id: 2,
     description: '',
-    amount: 0
+    amount: 0,
+    tag_id: 1
 });
 
 let props = defineProps({
     account: Object,
     accountCycle: Object,
-    movements: Object
+    movements: Object,
+    tags: Object
 });
 
 
