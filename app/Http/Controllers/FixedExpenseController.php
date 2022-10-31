@@ -10,6 +10,7 @@ use App\Models\FixedExpense;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 use Request;
 
 class FixedExpenseController extends Controller
@@ -68,11 +69,24 @@ class FixedExpenseController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreFixedExpenseRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(StoreFixedExpenseRequest $request)
     {
-        //
+        $attributes = Request::validate([
+            'description' => ['required', 'max:255'],
+            'amount' => ['required'],
+            'currency_id' => 'required',
+            'due_date' => ['required', 'numeric', 'between:1,28'],
+            'tag_id' => 'required',
+            'account_id' => 'nullable',
+        ]);
+
+        $attributes['user_id'] = Auth::user()->id;
+
+        FixedExpense::create($attributes);
+
+        return redirect('/fixed_expenses');
     }
 
     /**

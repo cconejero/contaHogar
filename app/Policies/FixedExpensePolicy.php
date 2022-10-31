@@ -30,7 +30,7 @@ class FixedExpensePolicy
      */
     public function view(User $user, FixedExpense $fixedExpense)
     {
-        return ($fixedExpense->user->id === $user->id);
+        return ($fixedExpense->user_id === $user->id);
     }
 
     /**

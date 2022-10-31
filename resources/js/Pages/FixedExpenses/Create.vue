@@ -141,7 +141,7 @@ let form = useForm({
     currency_id: 1,
     due_date: 1,
     tag_id: 1,
-    account_id: 'null'
+    account_id: null
 });
 
 let props = defineProps({
@@ -151,7 +151,7 @@ let props = defineProps({
 });
 
 let submit = () => {
-    form.post('/cards');
+    form.post('/fixed_expenses');
 };
 
 

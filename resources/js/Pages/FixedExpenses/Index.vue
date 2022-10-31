@@ -42,7 +42,7 @@
                                                 <Link v-if="fixedExpense.can.view"
                                                       :href="`/fixed_expenses/${fixedExpense.id}`"
                                                       class="text-indigo-600 hover:text-indigo-900"
-                                                >{{ fixedExpense.name }}</Link>
+                                                >{{ fixedExpense.description }}</Link>
                                             </div>
                                         </div>
                                     </div>
