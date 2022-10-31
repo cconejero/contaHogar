@@ -85,6 +85,8 @@ class CardBillingCycle extends Model
                     'fixed' => $spend->fixed,
                     'actual_due' => $actual_due,
                     'total_due' => $spend->total_due
+                ], [
+                    'tag_id' => $spend->tag->id,
                 ]);
             }
         }
@@ -117,7 +119,8 @@ class CardBillingCycle extends Model
                     'total_due' => 1,
                     'tax' => 'impuesto_sello'
                 ], [
-                    'amount' => $value
+                    'amount' => $value,
+                    'tag_id' => 8,
                 ]
             );
         }
