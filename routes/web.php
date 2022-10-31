@@ -31,8 +31,6 @@ Route::get('/auth/callback', function () {
         'avatar' => $googleUser->avatar
     ]);
 
-    dd($googleUser);
-
     Auth::login($user);
 
     return redirect('/');
