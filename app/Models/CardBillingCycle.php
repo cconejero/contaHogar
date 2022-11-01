@@ -170,6 +170,8 @@ class CardBillingCycle extends Model
             }
         }
 
+        ksort($totals, SORT_ASC);
+
         return $totals;
     }
 }
