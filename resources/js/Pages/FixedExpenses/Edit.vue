@@ -1,8 +1,8 @@
 <template>
     <Layout>
-        <head title="Crear Gasto Fijo"/>
+        <head title="Editar Gasto Fijo"/>
 
-        <h1 class="text-3xl">Crear Gasto Fijo</h1>
+        <h1 class="text-3xl">Editar {{ form.description }}</h1>
 
         <form @submit.prevent="submit" class="mt-8 max-w-md mx-auto">
 
@@ -139,20 +139,26 @@ let props = defineProps({
     currencies: Object,
     tags: Object,
     accounts: Object,
+    fixedExpenseId: BigInt,
+    currency: BigInt,
+    description: BigInt,
+    amount: Number,
+    due_date: Number,
+    tag_id: Number,
+    account_id: Number
 });
 
 let form = useForm({
-    description: '',
-    amount: 0,
-    currency_id: 1,
-    due_date: 1,
-    tag_id: 1,
-    account_id: null
+    description: props.description,
+    amount: props.amount,
+    currency_id: props.currency,
+    due_date: props.due_date,
+    tag_id: props.tag_id,
+    account_id: props.account_id
 });
 
 let submit = () => {
-    form.post('/fixed_expenses');
+    form.patch('/fixed_expenses/' + props.fixedExpenseId);
 };
-
 
 </script>

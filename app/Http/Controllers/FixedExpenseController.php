@@ -93,22 +93,60 @@ class FixedExpenseController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\FixedExpense  $fixedExpense
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(FixedExpense $fixedExpense)
     {
-        //
+        if (Auth::user()->can('view', $fixedExpense)){
+
+            return Inertia::render('FixedExpenses/Show', [
+                'fixedExpenseDets' => $fixedExpense->dets()
+                    ->orderByDesc('date')
+                    ->paginate(10)
+                    ->withQueryString()
+                    ->through(fn($fixedExpenseDet) => [
+                        'paid' => $fixedExpenseDet->paid,
+                        'date' => $fixedExpenseDet->date,
+                        ]
+                    ),
+                'fixedExpense' => [
+                    'id' => $fixedExpense->id,
+                    'description' => $fixedExpense->description,
+                    'amount' => $fixedExpense->amount,
+                    'currency' => [
+                        'name' => $fixedExpense->currency->name,
+                        'sign' => $fixedExpense->currency->sign
+                    ],
+                    'due_date' => $fixedExpense->due_date,
+                    'tag' => $fixedExpense->tag->name,
+                    'account' => $fixedExpense->account?->description
+                ]
+            ]);
+        } else {
+            return abort(403);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\FixedExpense  $fixedExpense
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(FixedExpense $fixedExpense)
     {
-        //
+        return Inertia::render('FixedExpenses/Edit', [
+            'currencies' => Currency::all(['id', 'name']),
+            'tags' => Tag::query()->whereNull('user_id')->get(['id', 'name']),
+            'accounts' => Account::query()->where('user_id', '=', Auth::user()->id)->get(['id', 'description']),
+            'fixedExpenseId' => $fixedExpense->id,
+            'currency' => $fixedExpense->currency_id,
+            'description' => $fixedExpense->description,
+            'amount' => $fixedExpense->amount,
+            'due_date' => $fixedExpense->due_date,
+            'tag_id' => $fixedExpense->tag_id,
+            'account_id' => $fixedExpense->account_id,
+        ]);
     }
 
     /**
@@ -116,11 +154,24 @@ class FixedExpenseController extends Controller
      *
      * @param  \App\Http\Requests\UpdateFixedExpenseRequest  $request
      * @param  \App\Models\FixedExpense  $fixedExpense
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(UpdateFixedExpenseRequest $request, FixedExpense $fixedExpense)
     {
-        //
+        $attributes = Request::validate([
+            'description' => ['required', 'max:255'],
+            'amount' => ['required'],
+            'currency_id' => 'required',
+            'due_date' => ['required', 'numeric', 'between:1,28'],
+            'tag_id' => 'required',
+            'account_id' => 'nullable',
+        ]);
+
+        $attributes['user_id'] = Auth::user()->id;
+
+        $fixedExpense->update($attributes);
+
+        return redirect('/fixed_expenses');
     }
 
     /**

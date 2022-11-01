@@ -73,6 +73,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/fixed_expenses', [FixedExpenseController::class, 'index']);
     Route::get('/fixed_expenses/create', [FixedExpenseController::class, 'create']);
+    Route::get('/fixed_expenses/{fixed_expense}/edit', [FixedExpenseController::class, 'edit']);
+    Route::get('/fixed_expenses/{fixed_expense}', [FixedExpenseController::class, 'show']);
     Route::post('/fixed_expenses', [FixedExpenseController::class, 'store']);
+    Route::patch('/fixed_expenses/{fixed_expense}', [FixedExpenseController::class, 'update']);
 
 });

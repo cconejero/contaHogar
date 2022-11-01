@@ -51,7 +51,23 @@
                                 <td
                                     class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                                 >
-                                    <div>{{ fixedExpense.amount }}</div>
+                                    <div>Día {{ fixedExpense.dueDate }} del mes</div>
+                                </td>
+
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                >
+                                    <div>{{ fixedExpense.currencySign }} {{ fixedExpense.amount }}</div>
+                                </td>
+
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                >
+                                    <div>
+                                        <span class="bg-blue-300 px-3 py-2 rounded-full">
+                                            {{ fixedExpense.tag }}
+                                        </span>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>

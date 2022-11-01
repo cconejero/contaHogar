@@ -5,6 +5,7 @@
     "dev": "npx mix watch"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@headlessui/vue": "^1.7.3",
     "@heroicons/vue": "^2.0.12",
     "@inertiajs/inertia": "^0.11.1",

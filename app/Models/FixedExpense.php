@@ -23,4 +23,9 @@ class FixedExpense extends Model
     {
         return $this->belongsTo(Account::class);
     }
+
+    public function dets()
+    {
+        return $this->hasMany(FixedExpenseDet::class);
+    }
 }
