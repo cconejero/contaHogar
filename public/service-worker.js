@@ -91,7 +91,7 @@ define(['./workbox-8b6cdeda'], (function (workbox) { 'use strict';
     "revision": "93892a788a8f33cc0b1985853567d40f"
   }, {
     "url": "css/app.css",
-    "revision": "ce17835e841758ec7e716bf192e2322f"
+    "revision": "a42c9fa7685324b0c3c8e036c4019cd4"
   }], {});
 
 }));
