@@ -69,7 +69,7 @@ class AccountCycle extends Model
                 'account_cycle_id' => $this->id,
                 'description' => 'Saldo del mes anterior',
             ], [
-                'amount' => $totalPrevSpend,
+                'amount' => abs($totalPrevSpend),
                 'movement_id' => ($totalPrevSpend < 0 ? 2 : 1)
             ]);
         }
