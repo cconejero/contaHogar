@@ -26,8 +26,8 @@
             <ViewItem title="Fecha de cierre">{{ billingCycle.generation_date }}</ViewItem>
             <ViewItem title="Fecha de vencimiento">{{ billingCycle.due_date }}</ViewItem>
             <ViewItem title="Totales">
-                <div v-for="item in total">
-                    {{ item.currency }} {{ item.amount.toLocaleString('es-AR', {style: 'decimal', minimumFractionDigits: 2}) }}
+                <div v-for="(value, sign) in totals">
+                    {{ sign }} {{ value.toLocaleString('es-AR', {style: 'decimal', minimumFractionDigits: 2}) }}
                 </div>
             </ViewItem>
         </View>
@@ -85,19 +85,8 @@ let props = defineProps({
     billingCycle: Object,
     nextBillingCycle: Object,
     prevBillingCycle: Object,
+    totals: Array,
     filters: Object,
 });
-
-let total = _(props.spends.data)
-    .groupBy("sign")
-    .map((objs, key) => {
-        return {
-            currency: key,
-            amount: _.sumBy(objs, function (o) {
-                return Number(o.amount);
-            }),
-        };
-    })
-    .value();
 
 </script>

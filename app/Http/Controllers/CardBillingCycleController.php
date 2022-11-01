@@ -57,6 +57,7 @@ class CardBillingCycleController extends Controller
             $cardBillingCycle->import();
             $cardBillingCycle->calculateImpuestoSellos();
             //$cardBillingCycle->calculateImpuestoPais();
+            $cardBillingCycle->getTotals();
 
             return Inertia::render('Cards/Show', [
                 'card' => $cardBillingCycle->card->only(
@@ -77,6 +78,7 @@ class CardBillingCycleController extends Controller
                 'prevBillingCycle' => $cardBillingCycle->prevMonth()->only(
                     'id', 'year', 'month', 'generation_date', 'due_date'
                 ),
+                'totals' => $cardBillingCycle->getTotals(),
                 'spends' => $cardBillingCycle->spends()
                     ->orderByDesc('fixed')
                     ->orderBy('tax')

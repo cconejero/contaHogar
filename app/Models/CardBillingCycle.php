@@ -158,4 +158,18 @@ class CardBillingCycle extends Model
         }
     }
 
+    public function getTotals()
+    {
+        $totals = [];
+
+        foreach($this->spends as $spend){
+            if (array_key_exists($spend->currency->sign, $totals)){
+                $totals[$spend->currency->sign] += $spend->amount;
+            } else {
+                $totals[$spend->currency->sign] = $spend->amount;
+            }
+        }
+
+        return $totals;
+    }
 }

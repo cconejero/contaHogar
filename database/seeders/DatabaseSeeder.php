@@ -70,5 +70,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Gasto'
         ]);
 
+        $this->call([
+            TagSeeder::class,
+        ]);
     }
 }
