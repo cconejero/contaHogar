@@ -49,16 +49,15 @@ class Card extends Model
     public function actualBillingCycle()
     {
         $date = Carbon::create(now()->year, now()->month, 1);
+        $generationDate = $this->getGenerationDate($date);
 
-        $billingCycle = CardBillingCycle::firstOrCreate([
+        return CardBillingCycle::firstOrCreate([
             'card_id' => $this->id,
             'month' => $date->month,
             'year' => $date->year
         ], [
-            'generation_date' => $this->getGenerationDate($date),
-            'due_date' => $this->getDueDate($date)
+            'generation_date' => $generationDate,
+            'due_date' => $this->getDueDate($generationDate)
         ]);
-
-        return $billingCycle;
     }
 }

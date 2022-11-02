@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCardBillingCycleRequest;
 use App\Http\Requests\UpdateCardBillingCycleRequest;
+use App\Models\Account;
+use App\Models\AccountSpend;
 use App\Models\Card;
 use App\Models\CardBillingCycle;
 use App\Models\CardSpend;
@@ -70,7 +72,7 @@ class CardBillingCycleController extends Controller
                     'name'
                 ),
                 'billingCycle' => $cardBillingCycle->only(
-                    'id', 'year', 'month', 'generation_date', 'due_date'
+                    'id', 'year', 'month', 'generation_date', 'due_date', 'paid'
                 ),
                 'nextBillingCycle' => $cardBillingCycle->nextMonth()->only(
                     'id', 'year', 'month', 'generation_date', 'due_date'
@@ -78,6 +80,12 @@ class CardBillingCycleController extends Controller
                 'prevBillingCycle' => $cardBillingCycle->prevMonth()->only(
                     'id', 'year', 'month', 'generation_date', 'due_date'
                 ),
+                'accounts' => Account::where([
+                    ['user_id', '=', Auth::user()->id],
+                    ['currency_id', '=', 1]
+                ])->get([
+                    'id', 'description'
+                ]),
                 'totals' => $cardBillingCycle->getTotals(),
                 'spends' => $cardBillingCycle->spends()
                     ->orderByDesc('fixed')
@@ -136,4 +144,26 @@ class CardBillingCycleController extends Controller
     {
         //
     }
+
+    public function paywithaccount(CardBillingCycle $cardBillingCycle, Account $account)
+    {
+        if (($cardBillingCycle->card->user_id === Auth::user()->id) and ($account->user_id === Auth::user()->id)){
+
+            $cardBillingCycle->paid = true;
+
+            $description = $cardBillingCycle->card->name . ' ' . $cardBillingCycle->month . '/' . $cardBillingCycle->year;
+
+            AccountSpend::create([
+                'account_cycle_id' => $account->actualBillingCycle()->id,
+                'description' => $description,
+                'amount' => $cardBillingCycle->getTotals()[0]['amount'],
+                'movement_id' => 2,
+            ]);
+
+            $cardBillingCycle->save();
+        }
+
+        return redirect('/billing_cycle/' . $cardBillingCycle->id);
+    }
+
 }

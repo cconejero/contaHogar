@@ -26,9 +26,29 @@
             <ViewItem title="Fecha de cierre">{{ billingCycle.generation_date }}</ViewItem>
             <ViewItem title="Fecha de vencimiento">{{ billingCycle.due_date }}</ViewItem>
             <ViewItem title="Totales">
-                <div v-for="(value, sign) in totals">
-                    {{ sign }} {{ value.toLocaleString('es-AR', {style: 'decimal', minimumFractionDigits: 2}) }}
+                <div v-for="total in totals">
+                    {{ total.sign }} {{ total.amount.toLocaleString('es-AR', {style: 'decimal', minimumFractionDigits: 2}) }}
                 </div>
+            </ViewItem>
+            <ViewItem title="Pagar">
+                <form @submit.prevent="submit" class="flex items-baseline" v-if="!billingCycle.paid">
+                    <select v-model="form.account_id"
+                            class="border rounded border-gray-400 p-2 w-full bg-white">
+                        <option v-for="account in accounts"
+                                :value="account.id"
+                                :key="account.id"
+                        >{{ account.description }}</option>
+                    </select>
+                    <button
+                        v-if="accounts.length > 0"
+                        type="submit"
+                        :disabled="form.processing"
+                        class="ml-4 inline-flex justify-center rounded-md border border-transparent bg-red-400 px-4 py-2 text-sm font-medium text-white hover:bg-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                    >
+                        Pagar
+                    </button>
+                </form>
+                <span v-else class="bg-green-400 rounded-full px-3 py-1">Pago</span>
             </ViewItem>
         </View>
 
@@ -62,18 +82,20 @@
         </ViewDetail>
 
         <Pagination :links="spends.links" class="mt-6" />
+
     </Layout>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import Pagination from "../../Shared/Pagination";
-import { Link } from "@inertiajs/inertia-vue3";
+import {Link, useForm} from "@inertiajs/inertia-vue3";
 import Layout from "../../Shared/Layout";
-import _ from "lodash";
 import View from "../../Shared/View";
 import ViewItem from "../../Shared/ViewItem";
 import ViewDetail from "../../Shared/ViewDetail";
 import ViewDetailItem from "../../Shared/ViewDetailItem";
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -86,7 +108,17 @@ let props = defineProps({
     nextBillingCycle: Object,
     prevBillingCycle: Object,
     totals: Array,
+    accounts: Object,
     filters: Object,
 });
+
+let form = useForm({
+    card_billing_cycle_id: props.billingCycle.id,
+    account_id: 1,
+});
+
+let submit = () => {
+    form.post('/billing_cycle/' + form.card_billing_cycle_id + '/paywithaccount/' + form.account_id );
+};
 
 </script>

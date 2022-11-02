@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/billing_cycle/{card_billing_cycle}', [CardBillingCycleController::class, 'show']);
     Route::post('/billing_cycle/{card_billing_cycle}/import', [CardBillingCycleController::class, 'import']);
+    Route::post('/billing_cycle/{card_billing_cycle}/paywithaccount/{account}', [CardBillingCycleController::class, 'paywithaccount']);
 
     Route::get('/card_spends/{card_billing_cycle}/create', [CardSpendController::class, 'create']);
     Route::post('/card_spends/{card_billing_cycle}', [CardSpendController::class, 'store']);

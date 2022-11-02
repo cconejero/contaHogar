@@ -80,13 +80,13 @@ class CardBillingCycle extends Model
                 $cardSpend = CardSpend::firstOrCreate([
                     'card_billing_cycle_id' => $this->id,
                     'description' => $spend->description,
-                    'amount' => $spend->amount,
                     'currency_id' => $spend->currency_id,
                     'fixed' => $spend->fixed,
                     'actual_due' => $actual_due,
                     'total_due' => $spend->total_due
                 ], [
                     'tag_id' => $spend->tag->id,
+                    'amount' => $spend->amount,
                 ]);
             }
         }
@@ -172,6 +172,11 @@ class CardBillingCycle extends Model
 
         ksort($totals, SORT_ASC);
 
-        return $totals;
+        return array_map(function ($key, $value){
+            return [
+                'sign' => $key,
+                'amount' => $value
+            ];
+        }, array_keys($totals), array_values($totals));
     }
 }
