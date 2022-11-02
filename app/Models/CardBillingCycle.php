@@ -126,7 +126,7 @@ class CardBillingCycle extends Model
         }
     }
 
-    public function calculateImpuestoPais(){
+    public function calculateImpuesto4815(){
         $spends = CardSpend::query()
             ->where('card_billing_cycle_id', $this->id)
             ->where('currency_id', '!=', 1)
@@ -145,12 +145,12 @@ class CardBillingCycle extends Model
             CardSpend::updateOrCreate(
                 [
                     'card_billing_cycle_id' => $this->id,
-                    'description' => 'Impuesto País ' . Currency::find($key)->name,
+                    'description' => 'Percep AFIP RG 4815 45%' . Currency::find($key)->name,
                     'currency_id' => $key,
                     'fixed' => false,
                     'actual_due' => 1,
                     'total_due' => 1,
-                    'tax' => 'impuesto_pais'
+                    'tax' => 'impuesto_4815'
                 ], [
                     'amount' => $value
                 ]

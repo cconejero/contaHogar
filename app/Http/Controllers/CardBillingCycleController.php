@@ -59,7 +59,7 @@ class CardBillingCycleController extends Controller
 
             $cardBillingCycle->import();
             $cardBillingCycle->calculateImpuestoSellos();
-            //$cardBillingCycle->calculateImpuestoPais();
+            $cardBillingCycle->calculateImpuesto4815();
             $cardBillingCycle->getTotals();
 
             return Inertia::render('Cards/Show', [
