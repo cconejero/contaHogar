@@ -9,6 +9,7 @@ use App\Models\AccountSpend;
 use App\Models\Card;
 use App\Models\CardBillingCycle;
 use App\Models\CardSpend;
+use App\Models\Exchange;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Request;
@@ -80,6 +81,10 @@ class CardBillingCycleController extends Controller
                 'prevBillingCycle' => $cardBillingCycle->prevMonth()->only(
                     'id', 'year', 'month', 'generation_date', 'due_date'
                 ),
+                'dolar' => Exchange::where([
+                    ['currency_id', '=', 2],
+                    ['date', '=', $cardBillingCycle->generation_date]
+                ])->first(['id', 'value']),
                 'accounts' => Account::where([
                     ['user_id', '=', Auth::user()->id],
                     ['currency_id', '=', 1]
@@ -161,6 +166,26 @@ class CardBillingCycleController extends Controller
             ]);
 
             $cardBillingCycle->save();
+        }
+
+        return redirect('/billing_cycle/' . $cardBillingCycle->id);
+    }
+
+    public function closecycle(CardBillingCycle $cardBillingCycle)
+    {
+        $dolarValue = Exchange::where([
+            ['currency_id', '=', 2],
+            ['date', '=', $cardBillingCycle->generation_date]
+        ])->first(['value'])?->value;
+
+        foreach ($cardBillingCycle->spends as $spend){
+
+            if ($spend->currency_id === 2 and $dolarValue !== null){
+
+                $spend->amount = $spend->amount * $dolarValue;
+                $spend->currency_id = 1;
+                $spend->save();
+            }
         }
 
         return redirect('/billing_cycle/' . $cardBillingCycle->id);
