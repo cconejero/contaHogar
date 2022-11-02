@@ -27,12 +27,16 @@ class Kernel extends ConsoleKernel
 
             $today = $response[count($response) - 1];
 
-            Exchange::create([
+            Exchange::firstOrCreate([
                 'currency_id' => 2,
-                'date' => $today['d'],
+                'date' => $today['d']
+            ], [
                 'value' => $today["v"]
             ]);
-        })->dailyAt('15:00');
+        })
+            ->timezone('America/Argentina/Ushuaia')
+            ->between('14:00', '14:19')
+            ->name('Valor del dolar');
 
     }
 
