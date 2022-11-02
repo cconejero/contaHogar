@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
             ]);
         })
             ->timezone('America/Argentina/Ushuaia')
-            ->between('14:00', '14:19')
+            ->between('6:00', '6:19')
             ->name('Valor del dolar');
 
     }
