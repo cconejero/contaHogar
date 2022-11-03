@@ -80,11 +80,12 @@ class CardBillingCycle extends Model
                 $cardSpend = CardSpend::firstOrCreate([
                     'card_billing_cycle_id' => $this->id,
                     'description' => $spend->description,
-                    'currency_id' => $spend->currency_id,
                     'fixed' => $spend->fixed,
                     'actual_due' => $actual_due,
-                    'total_due' => $spend->total_due
+                    'total_due' => $spend->total_due,
+                    'tax' => $spend->tax
                 ], [
+                    'currency_id' => $spend->currency_id,
                     'tag_id' => $spend->tag->id,
                     'amount' => $spend->amount,
                 ]);
