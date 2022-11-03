@@ -1,7 +1,13 @@
-// TODO: Cerrar modulo tarjetas
+// Done.
+// Cerrar modulo tarjetas
 // Modulo Cuentas
-// Modulo Gastos Fijos
 // Clasificacion de gastos: Tarjetas, cuentas, gastos fijos
 
-// Pagina Home:
-// Saldos al día de la fecha
+
+
+// TODO:
+// Pagina Home: Saldos al día de la fecha
+// Corregir suma de los detalles de las cuentas.
+// Transferencia entre cuentas
+// Modulo Gastos Fijos
+// Modulo Prestamos
