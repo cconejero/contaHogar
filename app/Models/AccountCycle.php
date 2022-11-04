@@ -77,4 +77,15 @@ class AccountCycle extends Model
         return redirect('/account_cycle/' . $this->id);
     }
 
+    public function getTotal()
+    {
+        $total = 0;
+
+        foreach($this->spends as $spend){
+            $total += ($spend->movement_id === 2 ? -1 * $spend->amount : $spend->amount);
+        }
+
+        return $total;
+    }
+
 }

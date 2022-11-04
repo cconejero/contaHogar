@@ -77,6 +77,7 @@ class AccountCycleController extends Controller
                 'prevAccountCycle' => $accountCycle->prevMonth()->only(
                     'id', 'year', 'month'
                 ),
+                'total' => $accountCycle->getTotal(),
                 'spends' => $accountCycle->spends()
                     ->orderByDesc('created_at')
                     ->paginate(10)

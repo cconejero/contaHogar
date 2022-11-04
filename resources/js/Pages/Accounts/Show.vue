@@ -3,14 +3,13 @@
         <Head title="Cuenta" />
 
         <div class="flex justify-between items-center mb-6">
-            <div class="flex items-baseline">
+            <div class="flex items-baseline sm:-mx-2">
                 <h1 class="text-3xl">{{ account.description }}</h1>
 
                 <Link
                     :href="'/account_cycle/' + prevAccountCycle.id"
                     class="text-sm ml-4"
-                >&laquo;</Link
-                >
+                >&laquo;</Link>
                 <span class="text-sm ml-2">Período {{ accountCycle.month }}/{{ accountCycle.year }}</span>
                 <Link
                     :href="'/account_cycle/' + nextAccountCycle.id"
@@ -28,12 +27,9 @@
             <ViewItem title="Tipo de Cuenta">{{ accountType.name }}</ViewItem>
             <ViewItem title="Moneda">{{ currency.name }}</ViewItem>
             <ViewItem title="Totales">
-                <div v-for="item in total">
-                    {{ currency.sign }}
-                    <span :class="(item.amount < 0) ? 'text-red-500 font-bold' : 'text-green-700'">
-                        {{ item.amount.toLocaleString('es-AR', {style: 'decimal', minimumFractionDigits: 2}) }}
-                    </span>
-                </div>
+                {{ currency.sign }} <span :class="(props.total < 0) ? 'text-red-500 font-bold' : 'text-green-700'">
+                    {{ props.total.toLocaleString('es-AR', {style: 'decimal', minimumFractionDigits: 2}) }}
+                </span>
             </ViewItem>
         </View>
 
@@ -52,7 +48,9 @@
             >
                 <ViewDetailItem>{{ accountSpend.description }}</ViewDetailItem>
                 <ViewDetailItem>
-                    <span :class="(accountSpend.movement_id === 2) ? 'text-red-500' : 'text-green-700'">{{ currency.sign }} {{ accountSpend.amount }}</span>
+                    <span :class="(accountSpend.movement_id === 2) ? 'text-red-500' : 'text-green-700'">
+                        {{ currency.sign }} {{ accountSpend.amount }}
+                    </span>
                 </ViewDetailItem>
                 <ViewDetailItem>
                     <span class="bg-blue-300 rounded-full px-3 py-1">
@@ -86,20 +84,8 @@ let props = defineProps({
     accountCycle: Object,
     nextAccountCycle: Object,
     prevAccountCycle: Object,
+    total: Number,
     filters: Object
 });
-
-let total = _(props.spends.data)
-    .groupBy("account_id")
-    .map((objs, key) => {
-        return {
-            account_id: key,
-            amount: _.sumBy(objs, function (o) {
-                //return Number(o.movement_id === 2 ? (-1 * o.amount) : o.amount);
-                return Number(o.amount);
-            }),
-        };
-    })
-    .value()
 
 </script>
