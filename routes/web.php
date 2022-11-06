@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CardBillingCycleController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CardSpendController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FixedExpenseController;
 use App\Http\Controllers\UserController;
 use App\Models\FixedExpense;
@@ -35,7 +36,7 @@ Route::get('/auth/callback', function () {
 
     Auth::login($user);
 
-    return redirect('/');
+    return redirect('/dashboard');
 });
 
 Route::middleware('auth')->group(function () {
@@ -51,6 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', function () {
         return Inertia::render('Settings');
     });
+
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::get('/cards', [CardController::class, 'index']);
     Route::get('/cards/create', [CardController::class, 'create']);

@@ -14,6 +14,7 @@ class Card extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [];
+    protected $with = ['billingCycles'];
 
     public function bank()
     {
@@ -59,5 +60,13 @@ class Card extends Model
             'generation_date' => $generationDate,
             'due_date' => $this->getDueDate($generationDate)
         ]);
+    }
+
+    public function dueThisMonth()
+    {
+        $firstDay = now()->firstOfMonth()->format('Y-m-d');
+        $lastDay = now()->lastOfMonth()->format('Y-m-d');
+
+        return $this->billingCycles->whereBetween('due_date', [$firstDay, $lastDay])->first();
     }
 }

@@ -60,7 +60,7 @@
                 </form>
                 <span v-else-if="viewFormPagar && totals.length > 1">No cerró la tarjeta</span>
                 <span v-else-if="viewNotYet">No llegó la fecha de cierre</span>
-                <span v-else class="bg-green-400 rounded-full px-3 py-1">Pago</span>
+                <Paid v-else :paid="true" />
             </ViewItem>
         </View>
 
@@ -108,7 +108,7 @@ import View from "../../Shared/View";
 import ViewItem from "../../Shared/ViewItem";
 import ViewDetail from "../../Shared/ViewDetail";
 import ViewDetailItem from "../../Shared/ViewDetailItem";
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import Paid from "../../Shared/Paid";
 
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 

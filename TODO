@@ -2,12 +2,13 @@
 // Cerrar modulo tarjetas
 // Modulo Cuentas
 // Clasificacion de gastos: Tarjetas, cuentas, gastos fijos
+// Corregir suma de los detalles de las cuentas.
 
 
 
 // TODO:
 // Pagina Home: Saldos al día de la fecha
-// Corregir suma de los detalles de las cuentas.
+// El temita de los impuestos en las tarjetas cuando se pasan a pesos.
 // Transferencia entre cuentas
 // Modulo Gastos Fijos
 // Modulo Prestamos

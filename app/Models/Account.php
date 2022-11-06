@@ -12,6 +12,8 @@ class Account extends Model
 
     protected $guarded = [];
 
+    protected $with = ['currency'];
+
     public function accountType()
     {
         return $this->belongsTo(AccountType::class);
@@ -36,7 +38,6 @@ class Account extends Model
     {
         return $this->belongsTo(Currency::class);
     }
-
 
     public function actualBillingCycle()
     {

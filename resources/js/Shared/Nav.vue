@@ -90,7 +90,7 @@ const user = {
 }
 
 const navigation = [
-    { name: 'Inicio', href: '/', current: (usePage().component.value === "Home")},
+    { name: 'Inicio', href: '/dashboard', current: (usePage().component.value === "Home")},
     { name: 'Tarjetas', href: '/cards', current: (usePage().component.value === "Cards/Index") },
     { name: 'Cuentas', href: '/accounts', current: (usePage().component.value === "Accounts/Index") },
     { name: 'Gastos Fijos', href: '/fixed_expenses', current: (usePage().component.value === "FixedExpenses/Index") },

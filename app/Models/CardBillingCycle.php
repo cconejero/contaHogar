@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Date;
 class CardBillingCycle extends Model
 {
     use HasFactory;
+    protected $with = ['spends'];
 
     public function card()
     {

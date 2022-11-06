@@ -19,8 +19,6 @@
 </template>
 
 <script setup>
-import Pagination from "./Pagination";
-
 let props = defineProps({
     items: Object,
 });
