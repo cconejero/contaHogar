@@ -42,10 +42,11 @@
                 <tr v-for="card in cards">
                     <table-item>{{ card.name }}</table-item>
                     <table-item>
-                        <Amount v-for="total in card.totals" :sign="total?.sign" :value="total?.amount" />
+                        <Amount v-for="total in card.totals" class="ml-4" :sign="total?.sign" :value="total?.amount" />
                     </table-item>
                     <table-item>
-                        <Paid :paid="card.paid" />
+                        <span>Vence: {{ dayjs(card.due_date).format('DD/MM/YY') }}</span>
+                        <Paid :paid="card.paid" class="ml-4" />
                     </table-item>
                 </tr>
             </Table>
@@ -62,6 +63,7 @@ import TableItem from "../../Shared/TableItem";
 import Amount from "../../Shared/Amount";
 import {computed} from "vue";
 import Paid from "../../Shared/Paid";
+import dayjs from 'dayjs';
 
 let props = defineProps({
     accounts: Object,

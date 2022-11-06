@@ -36,7 +36,8 @@ class DashboardController extends Controller
                     'id' => $card->id,
                     'name' => $card->name,
                     'paid' => $card->dueThisMonth()?->paid,
-                    'totals' => $card->dueThisMonth()?->getTotals()
+                    'totals' => $card->dueThisMonth()?->getTotals(),
+                    'due_date' => $card->dueThisMonth()->due_date
                 ]),
         ]);
     }
