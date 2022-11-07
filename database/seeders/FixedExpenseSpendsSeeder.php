@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MovementSeeder extends Seeder
+class FixedExpenseSpendsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
