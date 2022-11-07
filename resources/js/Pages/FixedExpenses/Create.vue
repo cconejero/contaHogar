@@ -46,18 +46,6 @@
 
             <div class="mb-6">
                 <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                       for="currency_id"
-                >
-                    Moneda
-                </label>
-
-                <Radio :items="props.currencies" v-model="form.currency_id" />
-
-                <div v-if="form.errors.currency_id" v-text="form.errors.currency_id" class="text-red-500 text-xs mt-1"></div>
-            </div>
-
-            <div class="mb-6">
-                <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                        for="due_date"
                 >
                     Numero del día de vencimiento

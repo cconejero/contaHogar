@@ -23,9 +23,9 @@
         <View>
             <ViewItem title="Banco">{{ bank.name }}</ViewItem>
             <ViewItem title="Emisor">{{ brand.name }}</ViewItem>
-            <ViewItem title="Fecha de cierre">{{ billingCycle.generation_date }}</ViewItem>
+            <ViewItem title="Fecha de cierre">{{ dayjs(billingCycle.generation_date).format('DD/MM/YY') }}</ViewItem>
             <ViewItem title="Dolar oficial al cierre"><span v-if="dolar?.value">AR$</span> {{ dolar?.value }}</ViewItem>
-            <ViewItem title="Fecha de vencimiento">{{ billingCycle.due_date }}</ViewItem>
+            <ViewItem title="Fecha de vencimiento">{{ dayjs(billingCycle.due_date).format('DD/MM/YY') }}</ViewItem>
             <ViewItem title="Totales">
                 <div class="flex items-center">
                     <div>
@@ -100,7 +100,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import Pagination from "../../Shared/Pagination";
 import {Link, useForm} from "@inertiajs/inertia-vue3";
 import Layout from "../../Shared/Layout";
@@ -109,6 +108,7 @@ import ViewItem from "../../Shared/ViewItem";
 import ViewDetail from "../../Shared/ViewDetail";
 import ViewDetailItem from "../../Shared/ViewDetailItem";
 import Paid from "../../Shared/Paid";
+import dayjs from "dayjs";
 
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 

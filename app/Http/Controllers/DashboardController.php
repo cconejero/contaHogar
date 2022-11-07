@@ -21,12 +21,14 @@ class DashboardController extends Controller
     {
         $accounts = auth()->user()->accounts;
         $cards = auth()->user()->cards;
+        $fixedExpenses = auth()->user()->fixedExpenses;
 
         return Inertia::render('Dashboard/Index', [
             'accounts' => $accounts
                 ->map(fn($account) => [
                     'id' => $account->id,
                     'description' => $account->description,
+                    'actualCycleId' => $account->actualBillingCycle()->id,
                     'sign' => $account->currency->sign,
                     'currency_name' => $account->currency->name,
                     'actualCycleTotal' => $account->actualBillingCycle()->getTotal(),
@@ -35,9 +37,19 @@ class DashboardController extends Controller
                 ->map(fn($card) => [
                     'id' => $card->id,
                     'name' => $card->name,
+                    'actualBillingCycleId' => $card->dueThisMonth()->id,
                     'paid' => $card->dueThisMonth()?->paid,
                     'totals' => $card->dueThisMonth()?->getTotals(),
                     'due_date' => $card->dueThisMonth()?->due_date
+                ]),
+            'fixedExpenses' => $fixedExpenses
+                ->map(fn($fixedExpense) => [
+                    'id' => $fixedExpense->id,
+                    'description' => $fixedExpense->description,
+                    'current_cycle_id' => $fixedExpense->currentCycle()->id,
+                    'amount' => $fixedExpense->currentCycle()->getTotal(),
+                    'paid' => $fixedExpense->currentCycle()->paid,
+                    'due_date' => $fixedExpense->currentCycle()->due_date,
                 ]),
         ]);
     }

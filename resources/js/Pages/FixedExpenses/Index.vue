@@ -40,7 +40,7 @@
                                                 class="text-sm font-medium text-gray-900 flex items-center"
                                             >
                                                 <Link v-if="fixedExpense.can.view"
-                                                      :href="`/fixed_expenses/${fixedExpense.id}`"
+                                                      :href="`/fixed_expense_cycles/${fixedExpense.current_cycle_id}`"
                                                       class="text-indigo-600 hover:text-indigo-900"
                                                 >{{ fixedExpense.description }}</Link>
                                             </div>

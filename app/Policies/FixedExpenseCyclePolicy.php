@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Movement;
+use App\Models\FixedExpenseCycle;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MovementPolicy
+class FixedExpenseCyclePolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class MovementPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return false;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Movement  $movement
+     * @param  \App\Models\FixedExpenseCycle  $fixedExpenseCycle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Movement $movement)
+    public function view(User $user, FixedExpenseCycle $fixedExpenseCycle)
     {
-        //
+        return $fixedExpenseCycle->fixedExpense->user_id === $user->id;
     }
 
     /**
@@ -48,10 +48,10 @@ class MovementPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Movement  $movement
+     * @param  \App\Models\FixedExpenseCycle  $fixedExpenseCycle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Movement $movement)
+    public function update(User $user, FixedExpenseCycle $fixedExpenseCycle)
     {
         //
     }
@@ -60,10 +60,10 @@ class MovementPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Movement  $movement
+     * @param  \App\Models\FixedExpenseCycle  $fixedExpenseCycle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Movement $movement)
+    public function delete(User $user, FixedExpenseCycle $fixedExpenseCycle)
     {
         //
     }
@@ -72,10 +72,10 @@ class MovementPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Movement  $movement
+     * @param  \App\Models\FixedExpenseCycle  $fixedExpenseCycle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Movement $movement)
+    public function restore(User $user, FixedExpenseCycle $fixedExpenseCycle)
     {
         //
     }
@@ -84,10 +84,10 @@ class MovementPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Movement  $movement
+     * @param  \App\Models\FixedExpenseCycle  $fixedExpenseCycle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Movement $movement)
+    public function forceDelete(User $user, FixedExpenseCycle $fixedExpenseCycle)
     {
         //
     }

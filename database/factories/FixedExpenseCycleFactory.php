@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FixedExpenseDet>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FixedExpenseCycle>
  */
-class FixedExpenseDetFactory extends Factory
+class FixedExpenseCycleFactory extends Factory
 {
     /**
      * Define the model's default state.

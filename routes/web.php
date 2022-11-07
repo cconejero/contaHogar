@@ -9,8 +9,10 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\CardSpendController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FixedExpenseController;
+use App\Http\Controllers\FixedExpenseCycleController;
 use App\Http\Controllers\UserController;
 use App\Models\FixedExpense;
+use App\Models\FixedExpenseCycle;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -79,8 +81,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/fixed_expenses', [FixedExpenseController::class, 'index']);
     Route::get('/fixed_expenses/create', [FixedExpenseController::class, 'create']);
     Route::get('/fixed_expenses/{fixed_expense}/edit', [FixedExpenseController::class, 'edit']);
-    Route::get('/fixed_expenses/{fixed_expense}', [FixedExpenseController::class, 'show']);
     Route::post('/fixed_expenses', [FixedExpenseController::class, 'store']);
     Route::patch('/fixed_expenses/{fixed_expense}', [FixedExpenseController::class, 'update']);
+
+    Route::get('/fixed_expense_cycles/{fixed_expense_cycle}', [FixedExpenseCycleController::class, 'show']);
+    Route::get('/fixed_expense_cycles/{fixed_expense_cycle}/paywithaccount/{account}', [FixedExpenseCycleController::class, 'paywithaccount']);
 
 });

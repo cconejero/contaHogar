@@ -39,6 +39,7 @@ class FixedExpenseController extends Controller
                     'dueDate' => $fixedExpense->due_date,
                     'tag' => $fixedExpense->tag->name,
                     'account' => $fixedExpense->account,
+                    'current_cycle_id' => $fixedExpense->currentCycle()->id,
                     'can' => [
                         'edit' => Auth::user()->can('update', $fixedExpense),
                         'view' => Auth::user()->can('view', $fixedExpense)
@@ -97,34 +98,7 @@ class FixedExpenseController extends Controller
      */
     public function show(FixedExpense $fixedExpense)
     {
-        if (Auth::user()->can('view', $fixedExpense)){
 
-            return Inertia::render('FixedExpenses/Show', [
-                'fixedExpenseDets' => $fixedExpense->dets()
-                    ->orderByDesc('date')
-                    ->paginate(10)
-                    ->withQueryString()
-                    ->through(fn($fixedExpenseDet) => [
-                        'paid' => $fixedExpenseDet->paid,
-                        'date' => $fixedExpenseDet->date,
-                        ]
-                    ),
-                'fixedExpense' => [
-                    'id' => $fixedExpense->id,
-                    'description' => $fixedExpense->description,
-                    'amount' => $fixedExpense->amount,
-                    'currency' => [
-                        'name' => $fixedExpense->currency->name,
-                        'sign' => $fixedExpense->currency->sign
-                    ],
-                    'due_date' => $fixedExpense->due_date,
-                    'tag' => $fixedExpense->tag->name,
-                    'account' => $fixedExpense->account?->description
-                ]
-            ]);
-        } else {
-            return abort(403);
-        }
     }
 
     /**
