@@ -37,7 +37,7 @@ class DashboardController extends Controller
                 ->map(fn($card) => [
                     'id' => $card->id,
                     'name' => $card->name,
-                    'actualBillingCycleId' => $card->dueThisMonth()->id,
+                    'actualBillingCycleId' => $card->dueThisMonth()?->id,
                     'paid' => $card->dueThisMonth()?->paid,
                     'totals' => $card->dueThisMonth()?->getTotals(),
                     'due_date' => $card->dueThisMonth()?->due_date
