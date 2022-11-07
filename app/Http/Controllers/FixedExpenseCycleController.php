@@ -132,18 +132,7 @@ class FixedExpenseCycleController extends Controller
     {
         if (($fixedExpenseCycle->fixedExpense->user_id === Auth::user()->id) and ($account->user_id === Auth::user()->id)){
 
-            $fixedExpenseCycle->paid = true;
-
-            $description = $fixedExpenseCycle->fixedExpense->description . ' ' . $fixedExpenseCycle->month . '/' . $fixedExpenseCycle->year;
-
-            AccountSpend::create([
-                'account_cycle_id' => $account->actualBillingCycle()->id,
-                'description' => $description,
-                'amount' => $fixedExpenseCycle->getTotal(),
-                'movement_id' => 2,
-            ]);
-
-            $fixedExpenseCycle->save();
+            $fixedExpenseCycle->pay($account);
         }
 
         return redirect('/fixed_expense_cycles/' . $fixedExpenseCycle->id);

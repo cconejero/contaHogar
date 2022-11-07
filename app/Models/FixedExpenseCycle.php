@@ -35,7 +35,7 @@ class FixedExpenseCycle extends Model
     {
         $fixedExpense = $this->fixedExpense;
 
-        if ($fixedExpense->user_id === Auth::user()->id){
+        if (!$this->paid){
 
             $fixedExpenseSpend = FixedExpenseSpends::updateOrCreate([
                 'fixed_expense_cycle_id' => $this->id,
@@ -46,5 +46,21 @@ class FixedExpenseCycle extends Model
             ]);
         }
 
+    }
+
+    public function pay(Account $account)
+    {
+        $this->paid = true;
+
+        $description = $this->fixedExpense->description . ' ' . $this->month . '/' . $this->year;
+
+        AccountSpend::create([
+            'account_cycle_id' => $account->actualBillingCycle()->id,
+            'description' => $description,
+            'amount' => $this->getTotal(),
+            'movement_id' => 2,
+        ]);
+
+        $this->save();
     }
 }
