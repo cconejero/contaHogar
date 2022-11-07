@@ -50,17 +50,19 @@ class FixedExpenseCycle extends Model
 
     public function pay(Account $account)
     {
-        $this->paid = true;
+        if (!$this->paid){
+            $this->paid = true;
 
-        $description = $this->fixedExpense->description . ' ' . $this->month . '/' . $this->year;
+            $description = $this->fixedExpense->description . ' ' . $this->month . '/' . $this->year;
 
-        AccountSpend::create([
-            'account_cycle_id' => $account->actualBillingCycle()->id,
-            'description' => $description,
-            'amount' => $this->getTotal(),
-            'movement_id' => 2,
-        ]);
+            AccountSpend::create([
+                'account_cycle_id' => $account->actualBillingCycle()->id,
+                'description' => $description,
+                'amount' => $this->getTotal(),
+                'movement_id' => 2,
+            ]);
 
-        $this->save();
+            $this->save();
+        }
     }
 }
